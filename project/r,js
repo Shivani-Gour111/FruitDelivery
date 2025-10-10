@@ -141,3 +141,557 @@ function Navbar() {
 
 export default Navbar;
 // 
+
+// nevar
+// import { useState, useRef, useEffect } from "react";
+// import { FaShoppingBag } from "react-icons/fa";
+// import { IoSearch } from "react-icons/io5";
+// import { MdOutlineAccountCircle } from "react-icons/md";
+// // ✅ DropdownMenu Component
+// function DropdownMenu() {
+//   const [isOpen, setIsOpen] = useState(false);
+//   const toggleDropdown = () => setIsOpen(!isOpen);
+
+//   return (
+//     <div className="relative inline-block text-left">
+//       <button
+//         onClick={toggleDropdown}
+//         className="inline-flex items-center justify-center w-72 px-6 py-3 bg-green-600 text-white text-lg font-semibold rounded-full hover:bg-green-700 transition-all duration-300 shadow-md"
+//       >
+//         {/* Left Icon (Hamburger Menu) */}
+//         <svg
+//           className="w-5 h-5 mr-3"
+//           fill="none"
+//           stroke="currentColor"
+//           viewBox="0 0 24 24"
+//         >
+//           <path
+//             strokeLinecap="round"
+//             strokeLinejoin="round"
+//             strokeWidth="2"
+//             d="M4 6h16M4 12h16M4 18h16"
+//           />
+//         </svg>
+
+//         Shop By Category
+
+//         {/* Right Dropdown Arrow */}
+//         <svg
+//           className="w-5 h-5 ml-3"
+//           fill="none"
+//           stroke="currentColor"
+//           viewBox="0 0 24 24"
+//         >
+//           <path
+//             strokeLinecap="round"
+//             strokeLinejoin="round"
+//             strokeWidth="2"
+//             d="M19 9l-7 7-7-7"
+//           />
+//         </svg>
+//       </button>
+
+//       {isOpen && (
+//         <div className="absolute mt-2 w-64 bg-white rounded-md shadow-lg z-50">
+//           <ul className="py-1 text-gray-700 text-base">
+//             <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Fruits</li>
+//             <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Vegetables</li>
+//           </ul>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
+
+
+// function Navbar() {
+//   const [showSearch, setShowSearch] = useState(false);
+//   const searchRef = useRef(null);
+//   useEffect(() => {
+//     function handleClickOutside(event) {
+//       if (searchRef.current && !searchRef.current.contains(event.target)) {
+//         setShowSearch(false);
+//       }
+//     }
+
+//     if (showSearch) {
+//       document.addEventListener("mousedown", handleClickOutside);
+//     } else {
+//       document.removeEventListener("mousedown", handleClickOutside);
+//     }
+
+//     return () => document.removeEventListener("mousedown", handleClickOutside);
+//   }, [showSearch]);
+
+//   return (
+//     <>
+//       <nav className="fixed top-0 left-0 w-full z-50 bg-teal-900 border-b border-gray-200">
+//         <div className="w-full flex items-center justify-between px-10 py-4">
+//           <DropdownMenu />
+//           <ul className="flex space-x-12 text-white font-medium text-2xl mx-auto">
+//             <li>
+//               <Link to="/" className="hover:text-green-600">Home</Link>
+//             </li>
+//             <li>
+//               <Link to="/menu" className="hover:text-green-600">Menu</Link>
+//             </li>
+//             <li>
+//               <Link to="/services" className="hover:text-green-600">Services</Link>
+//             </li>
+//             <li>
+//               <Link to="/contact" className="hover:text-green-600">Contact</Link>
+//             </li>
+//           </ul>
+//           {/* Right Icons */}
+//           <div className="flex items-center space-x-10">
+//             {/* Search + Bag */}
+//             <div ref={searchRef} className="relative flex items-center space-x-10 mr-10 text-white">
+//               {/* Search Icon */}
+//               <IoSearch
+//                 className="text-3xl cursor-pointer hover:text-green-600"
+//                 onClick={() => setShowSearch(!showSearch)}
+//               />
+//               {/* Input (Open on click) */}
+//               {showSearch && (
+//                 <input
+//                   type="text"
+//                   placeholder="Search..."
+//                   autoFocus
+//                   className="bg-white text-black   pl-10  pr-10 rounded-md px-4 py-2 w-100 shadow-md outline-none transition-all duration-300 absolute right-10 top-[-4px]"
+//                 />
+//               )}
+//               {/* Bag Icon (Always visible) */}
+//               <FaShoppingBag className="text-3xl cursor-pointer hover:text-green-600" />
+//             </div>
+//             {/* Login / Signup Buttons */}
+//             <div className="flex items-center space-x-4 pr-10">
+//               <button className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-md hover:bg-green-600 hover:text-white">
+//                 <MdOutlineAccountCircle className="text-2xl" /> Login
+//               </button>
+//               <button className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-white hover:text-black">
+//                 <MdOutlineAccountCircle className="text-2xl" /> Signup
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </nav>
+//     </>
+//   );
+// }
+
+// export default Navbar;
+
+
+// import { useState, useRef, useEffect } from "react";
+// import { FaShoppingBag } from "react-icons/fa";
+// import { IoSearch } from "react-icons/io5";
+// import { MdOutlineAccountCircle } from "react-icons/md";
+// import { Link } from "react-router-dom";
+
+
+
+
+ {/* Hero Section */}
+      {/* <div className="relative w-screen h-[500px] overflow-hidden">
+        <div
+          className="absolute inset-0 w-full h-full bg-center bg-contain bg-no-repeat opacity-90"
+          style={{ backgroundImage: "url('icon.jpg')" }}
+        ></div>
+
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-5">
+            Fresh & Healthy Meals Delivered
+          </h1>
+          <p className="text-lg sm:text-xl max-w-2xl mb-6">
+            Enjoy organic and delicious food at your doorstep. Fast delivery.
+            Fresh ingredients. Always hot.
+          </p>
+        </div>
+      </div> */}
+
+{/* 
+      <div className="relative w-screen h-[1000px] overflow-hidden">
+  <div
+    className="absolute inset-0 w-full h-full bg-center bg-contain bg-no-repeat bg-image opacity-90"
+    style={{ backgroundImage: "url('icon.jpg')" }}
+  ></div>
+  <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+</div> */}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+//hafe code//
+
+
+// import { FiHome } from "react-icons/fi";
+// import { FaBoxOpen } from "react-icons/fa";
+// import { FaLeaf } from "react-icons/fa";
+// import { FaTruck } from "react-icons/fa";
+// export default function Menu() {
+//  const categories = [
+//     {
+//      title: 'Tomatoes',
+//     description: 'Juicy, ripe, and full of flavor — perfect for salads, sauces, and curries.',
+//     image: 'logo1.jpg', // Replace with your actual image path
+//   },
+//   {
+//     title: 'Kiwi',
+//     description: 'Tart and sweet with vibrant green flesh, rich in Vitamin C and antioxidants.',
+//     image: 'logo3.jpg',
+//   },
+//   {
+//     title: 'Strawberries',
+//     description: 'Sweet, fragrant berries loved for desserts, smoothies, and snacking.',
+//     image: 'logo2.jpg',
+//   },
+//   {
+//     title: 'Green Peas',
+//     description: 'Tender and sweet — perfect for curries, pulao, and stir-fries.',
+//     image: 'logo4.jpg',
+//   },
+//   ];
+//   const products = [
+//    {
+//     id: 1,
+//     name: "Tomato",
+//     subtext: "Fresh & Organic",
+//     price: "$4.70",
+//     oldPrice: "$7.00",
+//     image: "Tomato.jpg",
+//     rating: 4.5,
+//     sale: true,
+//   },
+//   {
+//     id: 2,
+//     name: "Eggplant",
+//     subtext: "Farm Fresh",
+//     price: "$5.99",
+//     image: "Eggplant.jpg",
+//     rating: 5,
+//     sale: false,
+//   },
+//   {
+//     id: 3,
+//     name: "Matar",
+//     subtext: "Home Grown",
+//     price: "$9.99",
+//     image: "Matar.jpg",
+//     rating: 4.5,
+//     sale: false,
+//   },
+//   {
+//     id: 4,
+//     name: "Chili",
+//     subtext: "Spicy Delight",
+//     price: "$7.00",
+//     oldPrice: "$9.00",
+//     image: "Chili.jpg",
+//     rating: 5,
+//     sale: true,
+//   },
+// ];
+
+  
+//   return (
+//     <div>
+  
+// <div className="relative w-screen h-[1000px] overflow-hidden">
+//   {/* Background Image */}
+//   <div
+//     className="absolute inset-0 w-full h-full bg-center bg-contain bg-no-repeat bg-image opacity-90"
+//     style={{ backgroundImage: "url('icon.jpg')" }}
+//   ></div>
+
+//   {/* Black overlay */}
+//   <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+
+//   {/* Centered Text shifted upward */}
+//   <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 -translate-y-20">
+//     <h1 className="text-4xl sm:text-5xl font-bold text-green-300 mb-4">
+//       Welcome to Menu Page
+//     </h1>
+//     <p className="text-lg sm:text-2xl text-white max-w-2xl">
+//       Discover fresh, healthy meals delivered to your doorstep with speed and care.
+//     </p>
+//   </div>
+// </div>
+
+//       {/* Feature Section */}
+//       <div className=" py-12 px-4 mt-12">
+//         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+//           {/* Card 1 */}
+//           <div className="flex flex-col items-center">
+//             <div className="bg-yellow-400 p-4 rounded-full mb-4">
+//               <FiHome />
+//             </div>
+//             <h3 className="font-semibold text-lg mb-2">
+//               Family-Owned & Operated
+//             </h3>
+//             <p className="text-sm text-gray-700">
+//               We’ve been growing with care for generations, right here on our land.
+//             </p>
+//           </div>
+
+//           {/* Card 2 */}
+//           <div className="flex flex-col items-center">
+//             <div className="bg-yellow-400 p-4 rounded-full mb-4">
+//               <FaBoxOpen />
+//             </div>
+//             <h3 className="font-semibold text-lg mb-2">
+//               Seasonal Farm Boxes
+//             </h3>
+//             <p className="text-sm text-gray-700">
+//               Get a rotating selection of what’s fresh, local, and in-season.
+//             </p>
+//           </div>
+
+//           {/* Card 3 */}
+//           <div className="flex flex-col items-center">
+//             <div className="bg-yellow-400 p-4 rounded-full mb-4">
+//               <FaLeaf />
+//             </div>
+//             <h3 className="font-semibold text-lg mb-2">
+//               Sustainable & Eco-Friendly
+//             </h3>
+//             <p className="text-sm text-gray-700">
+//               We use regenerative farming methods and minimal packaging.
+//             </p>
+//           </div>
+
+//           {/* Card 4 */}
+//           <div className="flex flex-col items-center">
+//             <div className="bg-yellow-400 p-4 rounded-full mb-4">
+//               <FaTruck />
+//             </div>
+//             <h3 className="font-semibold text-lg mb-2">
+//               Delivered to Your Door
+//             </h3>
+//             <p className="text-sm text-gray-700">
+//               Convenient local delivery and pickup options make eating well easy.
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+//      <div className="px-6 py-10">
+//       {/* Heading */}
+//       <div className="text-center mb-10">
+//         <h2 className="text-3xl font-bold text-gray-800 mb-2">
+//           Shop Fresh, Eat Local 🌱
+//         </h2>
+//         <p className="text-gray-600 max-w-xl mx-auto">
+//           Choose from our range of freshly harvested, local, and organic produce — grown with care for your health and the planet.
+//         </p>
+//       </div>
+
+//       {/* Boxes with hover effect */}
+//       <div className="flex flex-wrap justify-between gap-6">
+//         {categories.map((category, index) => (
+//           <div
+//             key={index}
+//             className="group relative w-full sm:w-[48%] lg:w-[23%] h-80 rounded-lg shadow-md overflow-hidden cursor-pointer"
+//           >
+//             {/* Image with zoom on hover */}
+//             <div
+//               className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+//               style={{ backgroundImage: `url(${category.image})` }}
+//             ></div>
+
+//             {/* Overlay with text */}
+//             <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 group-hover:bg-opacity-70 text-white px-4 py-3 transition-all duration-300">
+//               <h3 className="text-lg font-bold">{category.title}</h3>
+//               <p className="text-sm mt-1">{category.description}</p>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//     <div className="bg-[#fdf6ee] min-h-screen py-12 px-6">
+//       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+//         {products.map((item) => (
+//           <div
+//             key={item.id}
+//             className="bg-white rounded-2xl shadow-md p-4 text-center relative hover:shadow-lg transition-shadow duration-300"
+//           >
+//             {/* Sale Tag */}
+//             {item.oldPrice && (
+//               <span className="absolute top-3 left-3 bg-yellow-300 text-xs font-semibold px-3 py-1 rounded">
+//                 SALE
+//               </span>
+//             )}
+
+//             {/* Product Image */}
+//             <img
+//               src={item.image}
+//               alt={item.name}
+//               className="w-32 h-32 object-contain mx-auto mt-4"
+//             />
+
+//             {/* Product Info */}
+//             <h3 className="mt-4 font-semibold text-gray-800">{item.name}</h3>
+//             <div className="flex justify-center items-center gap-2 mt-2">
+//               {item.oldPrice && (
+//                 <span className="text-gray-400 line-through text-sm">
+//                   {item.oldPrice}
+//                 </span>
+//               )}
+//               <span className="text-yellow-600 font-semibold">{item.price}</span>
+//             </div>
+
+//             {/* Add to Cart */}
+//             <button className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 rounded-full transition">
+//               Add to Cart 🛒
+//             </button>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//     </div>
+//   );
+// }
+
+
+// export default function Menu() {
+//    const products = [
+//     { id: 1, name: "Papaya", price: "$110.00", image: "Papaya1.jpg" },
+//     { id: 2, name: "Kiwi", price: "$90.00", image: "kiwi1.jpg" },
+//     { id: 3, name: "Granatalma", price: "$50.00", image: "Gránátalma.jpg" },
+//     { id: 4, name: "Banana", price: "$120.00", image: "Banana.jpg" },
+//     { id: 5, name: "Stroberi", price: "$99.00", image: "stroberi.jpg" },
+//     { id: 6, name: "Apple", price: "$80.00", image: "Apple.jpg" },
+//     { id: 7, name: "Mango", price: "$130.00", image: "mango.jpg" },
+//     { id: 8, name: "Grapes", price: "$70.00", image: "grapes1.jpg" },
+//     { id: 9, name: "Orange", price: "$100.00", image: "o.jpg" },
+//     { id: 10, name: "Cherry", price: "$140.00", image: "cherry.jpg" },
+//     { id: 11, name: "Pear", price: "$99.00", image: "Pear.jpg" },
+//     { id: 12, name: "Custard Apple", price: "$80.00", image: "c1.jpg" },
+//     { id: 13, name: "watermelon", price: "$130.00", image: "Sandía.jpg" },
+//     { id: 14, name: " Raspberry", price: "$70.00", image: "Raspberry.jpg" },
+//     { id: 15, name: "Dragon Fruit", price: "$100.00", image: "Dragon1.jpg" }
+//   ];
+//   const products1 = [
+//     { id: 1, name: "Potato", price: "$110.00", image: "Potato.jpg" },
+//     { id: 2, name: "Cucumber", price: "$90.00", image: "Cucumber.jpg" },
+//     { id: 3, name: "Tameto", price: "$50.00", image: "tameto.jpg" },
+//     { id: 4, name: "Matar", price: "$120.00", image: "Matar.jpg" },
+//     { id: 5, name: "Stroberi", price: "$99.00", image: "stroberi.jpg" },
+//     { id: 6, name: "Lady’sFinger", price: "$80.00", image: "Lady’sFinger.jpg" },
+//     { id: 7, name: "Mango", price: "$130.00", image: "mango.jpg" },
+//     { id: 8, name: "Grapes", price: "$70.00", image: "grapes1.jpg" },
+//     { id: 9, name: "Orange", price: "$100.00", image: "o.jpg" },
+//     { id: 10, name: "Cherry", price: "$140.00", image: "cherry.jpg" },
+//     { id: 11, name: "Pear", price: "$99.00", image: "Pear.jpg" },
+//     { id: 12, name: "Custard Apple", price: "$80.00", image: "c1.jpg" },
+//     { id: 13, name: "watermelon", price: "$130.00", image: "Sandía.jpg" },
+//     { id: 14, name: " Raspberry", price: "$70.00", image: "Raspberry.jpg" },
+//     { id: 15, name: "Dragon Fruit", price: "$100.00", image: "Dragon1.jpg" }
+//   ];
+//   return (
+//     <>
+//        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 max-w-6xl mx-auto mt-20">
+//       {/* Yellow Box */}
+//       <div className="bg-yellow-400 text-white  shadow-lg p-6 flex flex-col justify-center items-start hover:scale-105 transition-transform">
+//         <h2 className="text-2xl font-bold mb-2">Fresh & Healthy</h2>
+//         <p className="mb-4">Shop Now</p>
+//         <button className="bg-white text-yellow-600 font-semibold px-4 py-2 rounded-full hover:bg-yellow-100">
+//           Explore
+//         </button>
+//       </div>
+//       {/* Green Box */}
+//       <div className="bg-green-500 text-white  shadow-lg p-6 flex flex-col justify-center items-start hover:scale-105 transition-transform">
+//         <h2 className="text-2xl font-bold mb-2">Fresh & Healthy</h2>
+//         <p className="mb-4">Shop Now</p>
+//         <button className="bg-white text-green-600 font-semibold px-4 py-2 rounded-full hover:bg-green-100">
+//           Explore
+//         </button>
+//       </div>
+//       {/* Red Box */}
+//       <div className="bg-red-500 text-white  shadow-lg p-6 flex flex-col justify-center items-start hover:scale-105 transition-transform">
+//         <h2 className="text-2xl font-bold mb-2">Fresh Food</h2>
+//         <p className="mb-4">Shop Now</p>
+//         <button className="bg-white text-red-600 font-semibold px-4 py-2 rounded-full hover:bg-red-100">
+//           Explore
+//         </button>
+//       </div>
+//     </div>
+//   <div className="w-full max-w-8xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-10 p-6">
+//   {products.map((item) => (
+//     <div
+//       key={item.id}
+//       className="bg-white w-full rounded-xl shadow-md p-8 flex flex-col items-center hover:scale-105 transition-transform mt-10"
+//     >
+//       <img
+//         src={item.image}
+//         alt={item.name}
+//         className="w-40 h-40 object-contain mb-4"
+//       />
+//       <h3 className="font-semibold text-2xl">{item.name}</h3>
+//       <p className="text-green-600 font-extrabold text-2xl">{item.price}</p>
+//       <button className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-400 transition-colors w-full">
+//         Add to Cart
+//       </button>
+//     </div> 
+//   ))}
+// </div>
+
+// <section className="mx-auto px-6 md:px-12 mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 w-full relative">
+//   {/* ✅ Left Box - Vegetables & Fruits */}
+//   <div
+//     className="rounded-2xl p-8 flex flex-col justify-center shadow-lg transform transition-transform duration-300 hover:scale-105 h-96 md:h-[450px] bg-cover bg-center"
+//     style={{ backgroundImage: "url('background1.jpg')" }}
+//   >
+//     <h2 className="text-2xl md:text-3xl font-bold text-green-300 drop-shadow-lg">
+//       Fresh Vegetable & Fruit Basket
+//     </h2>
+//     <p className="mt-3 text-black drop-shadow-md">
+//       Fresh, handpicked and delivered to your doorstep.
+//     </p>
+//   </div>
+
+//   {/* ✅ Right Box - Cuisine / Offers */}
+//   <div
+//     className="rounded-2xl p-8 flex flex-col justify-center items-end shadow-lg transform transition-transform duration-300 hover:scale-105 h-96 md:h-[450px] bg-cover bg-center"
+//     style={{ backgroundImage: "url('foddebg.jpg')" }}
+//   >
+//     <h2 className="text-2xl md:text-3xl font-bold text-green-300 drop-shadow-lg text-right">
+//       Best Cuisine from Around the World
+//     </h2>
+//     <p className="mt-3 text-black drop-shadow-md text-right">
+//       Delicious recipes & premium ingredients available every day.
+//     </p>
+//   </div>
+// </section>
+
+// <div className="w-full max-w-8xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-10 p-6">
+//   {products1.map((item) => (
+//     <div
+//       key={item.id}
+//       className="bg-white w-full rounded-xl shadow-md p-8 flex flex-col items-center hover:scale-105 transition-transform mt-10"
+//     >
+//       <img
+//         src={item.image}
+//         alt={item.name}
+//         className="w-40 h-40 object-contain mb-4"
+//       />
+//       <h3 className="font-semibold text-2xl">{item.name}</h3>
+//       <p className="text-green-600 font-extrabold text-2xl">{item.price}</p>
+//       <button className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-400 transition-colors w-full">
+//         Add to Cart
+//       </button>
+//     </div> 
+//   ))}
+// </div>
+//     </>
+//   );
+// }

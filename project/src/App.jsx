@@ -36,6 +36,7 @@ import Home from "./componet/Home";
 import Menu from "./componet/Menu";
 import Services from "./componet/Services";
 import Contact from "./componet/Contact";
+import Fruits from "./componet/Fruits";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/fruits" element={<Fruits />} />
       </Routes>
     </Router>
   );
