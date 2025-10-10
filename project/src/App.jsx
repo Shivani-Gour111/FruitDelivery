@@ -8,7 +8,6 @@ import Vegetables from "./componet/Vegetable";
 import Fruits from "./componet/Fruits";
 import Login from "./componet/Login";      // ✅ Import Login
 import SignUp from "./componet/SignUp";    // ✅ Import SignUp
-
 function App() {
   return (
     <Router>
