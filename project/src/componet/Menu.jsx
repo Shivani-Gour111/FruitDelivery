@@ -1,6 +1,4 @@
 
-
-
 import React from "react";
 import { FiHome } from "react-icons/fi";
 import { FaBoxOpen, FaLeaf, FaTruck, FaShoppingCart } from "react-icons/fa"; 
