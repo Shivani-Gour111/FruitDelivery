@@ -29,7 +29,11 @@ function DropdownMenu() {
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div
+      className="relative inline-block text-left"
+      onMouseEnter={() => !isMobile && setIsOpen(true)}
+      onMouseLeave={() => !isMobile && setIsOpen(false)}
+    >
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="px-3 py-1.5 bg-green-600 text-white rounded-md"
