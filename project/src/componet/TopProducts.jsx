@@ -107,10 +107,10 @@ export default function TopProducts() {
                   <span
                     key={i}
                     className={`text-xl ${
-                      i < product.rating ? "text-yellow-400" : "text-gray-300"
+                      i < product.rating ? "text-yellow-200" : "text-gray-300"
                     }`}
                   >
-                    <FaStar />
+                  
                   </span>
                 ))}
               </div>

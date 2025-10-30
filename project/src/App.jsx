@@ -1,38 +1,5 @@
-<<<<<<< HEAD
-import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
-=======
-// import Navbar from "./componet/Navbar"
-// function App(){
-//   return(
-//     <>
-    
-//     <Navbar/>
-    
-//     </>
-//   )
-// }
-// export default App
-
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import Navbar from "./componet/Navbar"
-// import Menu from "./componet/Menu";
-
-// function App() {
-//   return (
-//     <Router>
-//       <Navbar />
-//       <Routes>
-//         {/* Abhi sirf Menu page ka route rakha hai */}
-//         <Route path="/menu" element={<Menu />} />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
->>>>>>> dev_shivani
 import Navbar from "./componet/Navbar";
 import Footer from "./componet/Footer";
 import Home from "./componet/Home";
@@ -48,9 +15,6 @@ import { LikeProvider } from "./componet/LikeContext";
 import CartPage from "./componet/CartPage";
 import { CartProvider } from "./componet/CartContext";
 import { Toaster } from "react-hot-toast";
-
-
-// ✅ Layout jisme Navbar + Footer dono hain
 function MainLayout() {
   return (
     <>
@@ -77,7 +41,6 @@ function NoFooterLayout() {
 
 function App() {
   return (
-<<<<<<< HEAD
     
     <LikeProvider>
       <CartProvider>
@@ -105,20 +68,6 @@ function App() {
          <Toaster position="top-center" reverseOrder={false} />
       </CartProvider>
     </LikeProvider>
-=======
-    <Router>
-      <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/fruits" element={<Fruits />} />
-      </Routes>
-      
-    </Router>
->>>>>>> dev_shivani
   );
 }
 
