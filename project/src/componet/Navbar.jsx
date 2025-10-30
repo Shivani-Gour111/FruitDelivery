@@ -8,9 +8,8 @@ import { HiMenu, HiX } from "react-icons/hi";
 import { useLike } from "./LikeContext";
 import Wishlist from "./Wishlist";
 import { useNavigate } from "react-router-dom";
-// ❌ FaAppleAlt और GiCarrot के Imports हटा दिए गए हैं क्योंकि Dropdown हट गया है
-// ❌ import { FaAppleAlt } from "react-icons/fa";
-// ❌ import { GiCarrot } from "react-icons/gi";
+import { useCart } from "./CartContext";
+import { motion } from "framer-motion";
 
 // ⚠️ DropdownMenu कंपोनेंट को पूरी तरह से हटा दिया गया है।
 // ❌ DropdownMenu फ़ंक्शन यहाँ से हटा दिया गया है।
@@ -42,6 +41,8 @@ function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showWishlist, setShowWishlist] = useState(false);
   const navigate = useNavigate();
+  const { cartItems } = useCart();
+
 
   // Stop body scroll when Wishlist is open
   useEffect(() => {
@@ -103,7 +104,30 @@ function Navbar() {
               )}
             </NavLink>
 
-            <FaShoppingBag className="text-2xl cursor-pointer hover:text-green-400" />
+<div className="relative">
+  <motion.div
+    whileTap={{ scale: 0.9 }}
+    className="cursor-pointer text-2xl hover:text-green-400"
+    onClick={() => navigate("/cart")}  // ✅ Add this line
+  >
+    <FaShoppingBag />
+  </motion.div>
+
+  {cartItems.length > 0 && (
+    <motion.span
+      key={cartItems.length}
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{ type: "spring", stiffness: 300, damping: 10 }}
+      className="absolute -top-2 -right-2 bg-yellow-400 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full"
+    >
+      {cartItems.length}
+    </motion.span>
+  )}
+</div>
+
+
+
           </div>
 
           {/* Login / Signup */}
