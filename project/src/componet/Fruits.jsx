@@ -1,91 +1,48 @@
-// import React, { useState } from "react";
 
-// function Fruits() {
-//   const products = [
-//     { id: 1, name: "Papaya", price: "$110.00", image: "Papaya1.jpg" },
-//     { id: 2, name: "Kiwi", price: "$90.00", image: "kiwi1.jpg" },
-//     { id: 3, name: "Granatalma", price: "$50.00", image: "Gránátalma.jpg" },
-//     { id: 4, name: "Banana", price: "$120.00", image: "Banana.jpg" },
-//     { id: 5, name: "Stroberi", price: "$99.00", image: "stroberi.jpg" },
-//     { id: 6, name: "Apple", price: "$80.00", image: "Apple.jpg" },
-//     { id: 7, name: "Mango", price: "$130.00", image: "mango.jpg" },
-//     { id: 8, name: "Grapes", price: "$70.00", image: "grapes1.jpg" },
-//     { id: 9, name: "Orange", price: "$100.00", image: "o.jpg" },
-//     { id: 10, name: "Cherry", price: "$140.00", image: "cherry.jpg" },
-//     { id: 11, name: "Pear", price: "$99.00", image: "Pear.jpg" },
-//     { id: 12, name: "Custard Apple", price: "$80.00", image: "c1.jpg" },
-//     { id: 13, name: "Watermelon", price: "$130.00", image: "Sandía.jpg" },
-//     { id: 14, name: "Raspberry", price: "$70.00", image: "Raspberry.jpg" },
-//     { id: 15, name: "Dragon Fruit", price: "$100.00", image: "Dragon1.jpg" },
-//     { id: 16, name: "Dragon Fruit", price: "$100.00", image: "p1.jpg" },
-//   ];
-
-//   const [likedItems, setLikedItems] = useState([]); // liked fruits store होंगे
-
-//   // Toggle Like Button
-//   const toggleLike = (id) => {
-//     if (likedItems.includes(id)) {
-//       setLikedItems(likedItems.filter((itemId) => itemId !== id)); // unlike
-//     } else {
-//       setLikedItems([...likedItems, id]); // like
-//     }
-//   };
-
-//   // Add to Cart Function
-//   const handleAddToCart = (item) => {
-//     alert(item.name + " added to cart!");
-//   };
-
-//   return (
-//     <div className="w-full max-w-8xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 p-6">
-//       {products.map((item) => (
-//         <div
-//           key={item.id}
-//           className="bg-white w-full rounded-xl shadow-md p-6 flex flex-row items-center hover:scale-105 transition-transform mt-10"
-//         >
-//           {/* Image */}
-//           <img
-//             src={item.image}
-//             alt={item.name}
-//             className="w-32 h-32 object-contain mr-6"
-//           />
-
-//           {/* Text + Button */}
-//           <div className="flex flex-col items-start">
-//             <h3 className="font-semibold text-xl">{item.name}</h3>
-//             <p className="text-green-600 font-extrabold text-lg">{item.price}</p>
-
-//             {/* Buttons row */}
-//             <div className="flex gap-4 mt-4">
-//               {/* Add to Cart */}
-//               <button
-//                 onClick={() => handleAddToCart(item)}
-//                 className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-400 transition-colors"
-//               >
-//                 Add to Cart
-//               </button>
-
-//               {/* Like Button ❤️ */}
-//               <button
-//                 onClick={() => toggleLike(item.id)}
-//                 className="text-2xl"
-//               >
-//                 {likedItems.includes(item.id) ? "❤️" : "🤍"}
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
-
-// export default Fruits;
-
-
+import React, { useState } from "react";
 import { FaShoppingCart } from 'react-icons/fa';
-
+import { useCart } from "../context/CartContext"
 function Fruits() {
+
+  const [cart, setCart] = useState([]);
+
+const addToCart = (item) => {
+  const exist = cart.find((x) => x.id === item.id);
+  if (exist) {
+    // agar already cart me hai to quantity badhao
+    setCart(
+      cart.map((x) =>
+        x.id === item.id ? { ...x, quantity: x.quantity + 1 } : x
+      )
+    );
+  } else {
+    // agar pehli baar add kar raha hai
+    setCart([...cart, { ...item, quantity: 1 }]);
+  }
+};
+
+const increment = (id) => {
+  setCart(
+    cart.map((x) =>
+      x.id === id ? { ...x, quantity: x.quantity + 1 } : x
+    )
+  );
+};
+
+const decrement = (id) => {
+  setCart(
+    cart
+      .map((x) =>
+        x.id === id ? { ...x, quantity: x.quantity - 1 } : x
+      )
+      .filter((x) => x.quantity > 0)
+  );
+};
+
+const totalPrice = cart.reduce(
+  (acc, item) => acc + parseFloat(item.price.replace("$", "")) * item.quantity,
+  0
+);
 
   const products = [
     { id: 1, name: "Papaya", price: "$110.00", image: "Papaya1.jpg" },
@@ -173,9 +130,12 @@ function Fruits() {
                             </span>
                         </div>
                         {/* 🛒 Add to Cart Button 🛒 */}
-                        <button className="mt-5 bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold text-sm md:text-base py-2.5 px-6 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105 shadow-md">
-                            Add to Cart <FaShoppingCart className="text-base" />
-                        </button>
+                       <button
+  onClick={() => addToCart(item)}
+  className="mt-5 bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold text-sm md:text-base py-2.5 px-6 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105 shadow-md"
+>
+  Add to Cart <FaShoppingCart className="text-base" />
+</button>
                     </div>
                 ))}
             </div>
@@ -186,7 +146,64 @@ function Fruits() {
                     Browse All Products
                 </button>
             </div>
+            {/* Browse All Products Button */}
+<div className="text-center mt-12">
+  <button className="bg-yellow-400 text-gray-800 font-extrabold py-3 px-10 rounded-full border-2 border-yellow-600 hover:bg-yellow-500 hover:scale-105 transition-transform duration-300 shadow-xl">
+    Browse All Products
+  </button>
+</div>
+
+{/* 🛒 Cart Section 🛒 */}
+<div className="max-w-3xl mx-auto mt-16 bg-white p-6 rounded-2xl shadow-xl">
+  <h2 className="text-2xl font-bold mb-4 text-center">🛍️ Your Cart</h2>
+  {cart.length === 0 ? (
+    <p className="text-center text-gray-600">No items added yet.</p>
+  ) : (
+    <div>
+      {cart.map((item) => (
+        <div
+          key={item.id}
+          className="flex justify-between items-center border-b py-3"
+        >
+          <div className="flex items-center gap-4">
+            <img
+              src={item.image}
+              alt={item.name}
+              className="w-16 h-16 rounded-lg object-cover"
+            />
+            <div>
+              <h3 className="font-bold text-gray-800">{item.name}</h3>
+              <p className="text-yellow-600 font-semibold">{item.price}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => decrement(item.id)}
+              className="bg-gray-200 px-3 py-1 rounded-full font-bold"
+            >
+              -
+            </button>
+            <span>{item.quantity}</span>
+            <button
+              onClick={() => increment(item.id)}
+              className="bg-yellow-400 px-3 py-1 rounded-full font-bold"
+            >
+              +
+            </button>
+          </div>
         </div>
+      ))}
+      <h3 className="text-right text-xl font-bold mt-4">
+        Total: ${totalPrice.toFixed(2)}
+      </h3>
+    </div>
+  )}
+</div>
+
+        </div>
+
+
+
       {/* <section className="mx-auto px-6 md:px-12 mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 w-full relative">
         <div
           className="rounded-2xl p-8 flex flex-col justify-center shadow-lg transform transition-transform duration-300 hover:scale-105 h-96 md:h-[450px] bg-cover bg-center"
