@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { FaShoppingCart } from 'react-icons/fa';
-import { useCart } from "../context/CartContext"
+// import { useCart } from "../context/CartContext"
 function Fruits() {
 
   const [cart, setCart] = useState([]);
@@ -38,12 +38,10 @@ const decrement = (id) => {
       .filter((x) => x.quantity > 0)
   );
 };
-
 const totalPrice = cart.reduce(
   (acc, item) => acc + parseFloat(item.price.replace("$", "")) * item.quantity,
   0
 );
-
   const products = [
     { id: 1, name: "Papaya", price: "$110.00", image: "Papaya1.jpg" },
     { id: 2, name: "Kiwi", price: "$90.00", image: "kiwi1.jpg" },
