@@ -92,7 +92,7 @@ function Fruits() {
     { id: 2, name: "Kiwi", price: "$90.00", image: "kiwi1.jpg" },
     { id: 3, name: "Granatalma", price: "$50.00", image: "Gránátalma.jpg" },
     { id: 4, name: "Banana", price: "$120.00", image: "Banana.jpg" },
-    { id: 5, name: "Stroberi", price: "$99.00", image: "stroberi.jpg" },
+    { id: 5, name: "Strawberry", price: "$99.00", image: "stroberi.jpg" },
     { id: 6, name: "Apple", price: "$80.00", image: "Apple.jpg" },
     { id: 7, name: "Mango", price: "$130.00", image: "mango.jpg" },
     { id: 8, name: "Grapes", price: "$70.00", image: "grapes1.jpg" },
