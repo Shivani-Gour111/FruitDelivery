@@ -20,6 +20,8 @@ import { AuthProvider } from "./componet/AuthContext";
 import  UserProfile  from "./componet/UserProfile"// ✅ Import Auth Context
 import AddProduct from "./componet/AddProduct";
 import AdminLayout from "./componet/AdminLayout";
+import { useLocation } from "react-router-dom";
+
 
 function MainLayout() {
   return (

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaShoppingBag } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
 import { MdOutlineAccountCircle } from "react-icons/md";
@@ -8,8 +8,12 @@ import { useLike } from "./LikeContext";
 import Wishlist from "./Wishlist";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "./context/CartContext";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "./AuthContext";
+import { FaLeaf } from "react-icons/fa";
 
+
+import { BsPersonCircle } from "react-icons/bs";
 // ⚠️ DropdownMenu कंपोनेंट को पूरी तरह से हटा दिया गया है।
 // ❌ DropdownMenu फ़ंक्शन यहाँ से हटा दिया गया है।
 
@@ -34,12 +38,6 @@ function Logo() {
 // ---
 // ✅ Main Navbar Component
 // ---
-import { useCart } from "./CartContext";
-import { motion, AnimatePresence } from "framer-motion";
-import { useAuth } from "./AuthContext";
-import { FaAppleAlt } from "react-icons/fa";
-import { GiCarrot } from "react-icons/gi";
-import { BsPersonCircle } from "react-icons/bs";
 
 function Navbar() {
   const { likedItems } = useLike();

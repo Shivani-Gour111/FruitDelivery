@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useLike } from "./LikeContext";
 import { motion } from "framer-motion";
-import { useCart } from "./CartContext";
+import { useCart } from "./context/CartContext";
 import axios from "axios";
 import { FaShoppingCart } from "react-icons/fa";
  
