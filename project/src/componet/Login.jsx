@@ -1,66 +1,65 @@
 import React, { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { LogIn, Leaf } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "./AuthContext";
 
-export default function SignupStrict() {
+ function Login() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({ email: "" });
+  const [loading, setLoading] = useState(false);
+  const [popup, setPopup] = useState("");
+  const [role, setRole] = useState("user");
 
-  // Name: allow only letters and spaces
-  const handleNameChange = (e) => {
-    const raw = e.target.value;
-    // filter out anything that's not A-Z or space
-    const filtered = raw.replace(/[^A-Za-z\s]/g, "");
-    if (filtered !== raw) {
-      toast.error("Name me sirf letters allowed — numbers/symbols nahi.", { duration: 2000 });
-    }
-    setName(filtered);
-  };
+  const navigate = useNavigate();
+  const { login } = useAuth(); // ✅ Context se login function
 
-  // Password: allow only letters (A-Z), no numbers/symbols
-  const handlePasswordChange = (e) => {
-    const raw = e.target.value;
-    const filtered = raw.replace(/[^A-Za-z]/g, "");
-    if (filtered !== raw) {
-      toast.error("Password me sirf letters (A–Z) allowed — numbers/symbols nahi.", { duration: 2000 });
-    }
-    setPassword(filtered);
-  };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  // Email: allow common email chars but block spaces and some invalid chars immediately
-  const handleEmailChange = (e) => {
-    const raw = e.target.value;
-    // allow letters, numbers, @, ., _, -, +
-    const filtered = raw.replace(/[^A-Za-z0-9@._\-+]/g, "");
-    if (filtered !== raw) {
-      toast.error("Email me spaces ya kuch special characters allowed nahi (use . _ - +).", { duration: 2000 });
-    }
-    setEmail(filtered);
-    // clear email inline error while typing
-    if (errors.email) setErrors((p) => ({ ...p, email: "" }));
-  };
+    try {
+      const res = await axios.post("http://localhost:5000/api/login", {
+        email: email.trim(),
+        password: password.trim(),
+      });
 
-  // If paste happens, also sanitize to ensure no invalid content gets in
-  const handlePasteName = (e) => {
-    const pasted = (e.clipboardData || window.clipboardData).getData("text");
-    if (/[^A-Za-z\s]/.test(pasted)) {
-      e.preventDefault();
-      toast.error("Pasting not allowed: Name me sirf letters allowed.", { duration: 2000 });
-    }
-  };
-  const handlePastePassword = (e) => {
-    const pasted = (e.clipboardData || window.clipboardData).getData("text");
-    if (/[^A-Za-z]/.test(pasted)) {
-      e.preventDefault();
-      toast.error("Pasting not allowed: Password me sirf letters allowed.", { duration: 2000 });
-    }
-  };
-  const handlePasteEmail = (e) => {
-    const pasted = (e.clipboardData || window.clipboardData).getData("text");
-    if (/[^A-Za-z0-9@._\-+]/.test(pasted)) {
-      e.preventDefault();
-      toast.error("Pasted email me kuch invalid characters hain.", { duration: 2000 });
+    if (res.data.success === false) {
+  setPopup("loginError");
+  setTimeout(() => setPopup(""), 1500);
+  return;
+}
+
+
+      if (res.data.user.role !== role) {
+        setPopup("roleError");
+        setTimeout(() => setPopup(""), 1500);
+        return;
+      }
+
+      localStorage.setItem("token", res.data.token);
+
+      if (res.data.user.role === "admin") {
+        localStorage.setItem("admin", JSON.stringify(res.data.user));
+      } else {
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+      }
+
+      // ✅ Inform React & Navbar instantly
+      login(res.data.user, res.data.token);
+
+      setPopup("success");
+
+      setTimeout(() => {
+        navigate(res.data.user.role === "admin" ? "/AdminLayout" : "/");
+      }, 1000);
+
+    } catch (err) {
+      setPopup("loginError");
+      setTimeout(() => setPopup(""), 1500);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -100,47 +99,82 @@ export default function SignupStrict() {
     toast.success("All inputs valid — ready to submit!");
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <Toaster position="top-center" reverseOrder={false} />
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md"
-      >
-        <h2 className="text-2xl font-bold text-center mb-6">Signup (Strict)</h2>
-        {/* Name */}
-        <label className="block text-sm font-medium mb-1">Name</label>
-        <input
-          value={name}
-          onChange={handleNameChange}
-          onPaste={handlePasteName}
-          placeholder="Only letters"
-          className="w-full p-3 mb-3 rounded border"
-        />
-        {/* Email */}
-        <label className="block text-sm font-medium mb-1">Email</label>
-        <input
-          value={email}
-          onChange={handleEmailChange}
-          onPaste={handlePasteEmail}
-          onBlur={handleEmailBlur}
-          placeholder="you@gmail.com"
-          className="w-full p-3 mb-1 rounded border"
-        />
-        {errors.email && <p className="text-red-500 text-sm mb-2">{errors.email}</p>}
-        {/* Password */}
-        <label className="block text-sm font-medium mb-1">Password</label>
-        <input
-          value={password}
-          onChange={handlePasswordChange}
-          onPaste={handlePastePassword}
-          placeholder="Only letters, min 6 chars"
-          className="w-full p-3 mb-3 rounded border"
-        />
-        <p className="text-xs text-gray-500 mb-4">Password must be letters only (A–Z) and at least 6 characters.</p>
-        <button className="w-full bg-green-600 text-white py-3 rounded-full" type="submit">
-          Sign Up
-        </button>
-      </form>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden">
+
+        <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+          <div className="flex items-end justify-center mb-6 relative">
+            <Leaf className="w-10 h-10 text-green-600 rotate-[-25deg] translate-y-1" />
+            <Leaf className="w-10 h-10 text-green-500 rotate-[25deg] -translate-y-0.5 -ml-2" />
+          </div>
+
+          <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-2 text-gray-800">
+            Welcome Back!
+          </h1>
+          <p className="text-center text-gray-500 mb-8">
+            Sign in with your Email and Password
+          </p>
+
+          <form onSubmit={handleLogin}>
+
+            <select
+              className="w-full p-3 mb-4 border border-gray-300 rounded-full focus:ring-2 focus:ring-green-500"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <option value="user">Login as User</option>
+              <option value="admin">Login as Admin</option>
+            </select>
+
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full p-3 mb-4 border border-gray-300 rounded-full focus:ring-2 focus:ring-green-500"
+            />
+
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full p-3 mb-4 border border-gray-300 rounded-full focus:ring-2 focus:ring-green-500"
+            />
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-black text-white py-3 rounded-full font-semibold hover:bg-gray-800 transition flex justify-center items-center"
+            >
+              <LogIn className="w-5 h-5 mr-2" />
+              {loading ? "Logging in..." : "Login"}
+            </button>
+
+            {/* ✅ Popup Messages */}
+            <div className="relative mt-3 h-12 flex justify-center">
+              {popup === "success" && <div className="popup-card">✅ Login Successful!</div>}
+              {popup === "loginError" && <div className="popup-card error-popup">❌ Invalid Email or Password</div>}
+              {popup === "roleError" && ( <div className="popup-card error-popup">⚠️ Please select correct login role!</div> )}
+            </div>
+          </form>
+
+          <p className="text-center mt-8 text-sm text-gray-600">
+            Don't have an account?{" "}
+            <Link to="/signup" className="font-semibold text-green-600 hover:text-green-700">
+              Register Now
+            </Link>
+          </p>
+        </div>
+
+        <div className="hidden md:block md:w-1/2">
+          <img src="login.jpg" alt="Food" className="w-full h-full object-cover" />
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default Login;

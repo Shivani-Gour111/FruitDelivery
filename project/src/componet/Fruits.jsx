@@ -49,22 +49,22 @@ function Fruits() {
   //   0
   // );
  const products = [
-  { id: 1, name: "Papaya", price: "₹110.00", image: "Papaya1.jpg", category: "Fruits" },
-  { id: 2, name: "Kiwi", price: "₹90.00", image: "kiwi1.jpg", category: "Fruits" },
-  { id: 3, name: "Granatalma", price: "₹50.00", image: "Gránátalma.jpg", category: "Fruits" },
-  { id: 4, name: "Banana", price: "₹120.00", image: "Banana.jpg", category: "Fruits" },
-  { id: 5, name: "Stroberi", price: "₹99.00", image: "stroberi.jpg", category: "Fruits" },
-  { id: 6, name: "Apple", price: "₹80.00", image: "Apple.jpg", category: "Fruits" },
-  { id: 7, name: "Mango", price: "₹130.00", image: "mango.jpg", category: "Fruits" },
-  { id: 8, name: "Grapes", price: "₹70.00", image: "grapes1.jpg", category: "Fruits" },
-  { id: 9, name: "Orange", price: "₹100.00", image: "o.jpg", category: "Fruits" },
-  { id: 10, name: "Cherry", price: "₹140.00", image: "cherry.jpg", category: "Fruits" },
-  { id: 11, name: "Pear", price: "₹99.00", image: "Pear.jpg", category: "Fruits" },
-  { id: 12, name: "Custard Apple", price: "₹80.00", image: "c1.jpg", category: "Fruits" },
-  { id: 13, name: "Watermelon", price: "₹130.00", image: "Sandía.jpg", category: "Fruits" },
-  { id: 14, name: "Raspberry", price: "₹70.00", image: "Raspberry.jpg", category: "Fruits" },
-  { id: 15, name: "Dragon Fruit", price: "₹100.00", image: "Dragon1.jpg", category: "Fruits" },
-  { id: 16, name: "Pineapple", price: "₹100.00", image: "p1.jpg", category: "Fruits" }
+  { id: 1, name: "Papaya", price: "$110.00", image: "Papaya1.jpg", category: "Fruits" },
+  { id: 2, name: "Kiwi", price: "$90.00", image: "kiwi1.jpg", category: "Fruits" },
+  { id: 3, name: "Granatalma", price: "$50.00", image: "Gránátalma.jpg", category: "Fruits" },
+  { id: 4, name: "Banana", price: "$120.00", image: "Banana.jpg", category: "Fruits" },
+  { id: 5, name: "Stroberi", price: "$99.00", image: "stroberi.jpg", category: "Fruits" },
+  { id: 6, name: "Apple", price: "$80.00", image: "Apple.jpg", category: "Fruits" },
+  { id: 7, name: "Mango", price: "$130.00", image: "mango.jpg", category: "Fruits" },
+  { id: 8, name: "Grapes", price: "$70.00", image: "grapes1.jpg", category: "Fruits" },
+  { id: 9, name: "Orange", price: "$100.00", image: "o.jpg", category: "Fruits" },
+  { id: 10, name: "Cherry", price: "$140.00", image: "cherry.jpg", category: "Fruits" },
+  { id: 11, name: "Pear", price: "$99.00", image: "Pear.jpg", category: "Fruits" },
+  { id: 12, name: "Custard Apple", price: "$80.00", image: "c1.jpg", category: "Fruits" },
+  { id: 13, name: "Watermelon", price: "$130.00", image: "Sandía.jpg", category: "Fruits" },
+  { id: 14, name: "Raspberry", price: "$70.00", image: "Raspberry.jpg", category: "Fruits" },
+  { id: 15, name: "Dragon Fruit", price: "$100.00", image: "Dragon1.jpg", category: "Fruits" },
+  { id: 16, name: "Pineapple", price: "$100.00", image: "p1.jpg", category: "Fruits" }
 ];
 
   return (

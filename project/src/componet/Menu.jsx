@@ -47,8 +47,7 @@ export default function Menu() {
       price: "₹4.70",
       
       image: "Tomato.jpg",
-      rating: 4.5,
-      sale: true,
+       sale: true,
     },
     {
       id: 2,
@@ -56,8 +55,7 @@ export default function Menu() {
       subtext: "Farm Fresh",
       price: "₹5.99",
       image: "Eggplant.jpg",
-      rating: 5,
-      sale: false,
+     sale: false,
     },
     {
       id: 3,
@@ -65,8 +63,7 @@ export default function Menu() {
       subtext: "Sweet Peas",
       price: "₹9.99",
       image: "Matar.jpg",
-      rating: 4.5,
-      sale: false,
+     sale: false,
     },
     { 
       id: 4,
@@ -74,7 +71,6 @@ export default function Menu() {
       subtext: "Hot Spice",
       price: "₹7.00",
       image: "Chili.jpg",
-      rating: 5,
       sale: true,
     },
     {
@@ -83,8 +79,7 @@ export default function Menu() {
       subtext: "Citrus Fresh",
       price: "₹9.99",
       image: "Orange1.jpg",
-      rating: 4.5,
-      sale: false,
+     sale: false,
     },
     {
       id: 6,
@@ -92,8 +87,7 @@ export default function Menu() {
       subtext: "Tropical King",
       price: "₹7.00",
       image: "mango.jpg",
-      rating: 5,
-      sale: true,
+     sale: true,
     },
     {
       id: 7,
@@ -102,7 +96,7 @@ export default function Menu() {
       price: "₹7.00",
       
       image: "grapes1.jpg",
-      rating: 5,
+       
       sale: true,
     },
     {
@@ -111,7 +105,7 @@ export default function Menu() {
       subtext: "Sweet Berry",
       price: "₹7.00",
       image: "stroberi.jpg",
-      rating: 5,
+       
       sale: true,
     },
   ];

@@ -1,25 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { FaShoppingCart } from "react-icons/fa";
-import { useCart } from "./context/CartContext";
+import axios from "axios";
+import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import { useLike } from "./LikeContext";
-import { FaRegHeart, FaHeart } from "react-icons/fa";
+
 function Vegetable() {
-  const { addToCart } = useCart();
-  const products1 = [
-    { id: 1, category: "Vegetables", name: "Potato", price: "₹110.00", image: "Potato.jpg", text: "Fresh & Organic" },
-    { id: 2, category: "Vegetables", name: "Cucumber", price: "₹90.00", image: "Cucumber.jpg", text: "Cool & Crisp" },
-    { id: 3, category: "Vegetables", name: "Tomato", price: "₹50.00", image: "tameto.jpg", text: "Juicy & Red" },
-    { id: 4, category: "Vegetables", name: "Matar", price: "$120.00", image: "Matar.jpg", text: "Sweet & Green" },
-    { id: 5, category: "Vegetables", name: "Chilli", price: "₹99.00", image: "chilli.jpg", text: "Hot & Spicy" },
-    { id: 6, category: "Vegetables", name: "Lady’s Finger", price: "₹80.00", image: "lady.jpg", text: "Soft & Fresh" },
-    { id: 7, category: "Vegetables", name: "Bell Peppers", price: "₹130.00", image: "BellPeppers.jpg", text: "Colorful & Crisp" },
-    { id: 8, category: "Vegetables", name: "Cauliflower", price: "₹70.00", image: "cauliflower.jpg", text: "Pure & Natural" },
-    { id: 9, category: "Vegetables", name: "Onion", price: "₹100.00", image: "Onion.jpg", text: "Sharp & Fresh" },
-    { id: 10, category: "Vegetables", name: "Coriander", price: "₹140.00", image: "coriander1.jpg", text: "Hot & Bold" },
-    { id: 11, category: "Vegetables", name: "BitterGourd", price: "₹120.00", image: "BitterGourd.jpg", text: "Hot & Bold" },
-    { id: 12, category: "Vegetables", name: "Cabbage", price: "₹120.00", image: "cabbage.jpg", text: "Hot & Bold" },
-  ];
+  const [products1, setProducts1] = useState([]);
+
   const { toggleLike, isLiked } = useLike();
+
+  // Fetch vegetable category products from database
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/products");
+        
+        // Filter only vegetable category items
+        const vegData = res.data.filter(
+          item => item.category?.toLowerCase() === "vegetable"
+        );
+
+        setProducts1(vegData);
+      } catch (error) {
+        console.log("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <div className="bg-gray-50">
       <div className="flex flex-col md:flex-row max-w-6xl mx-auto my-12 p-6 md:p-8 bg-white rounded-lg shadow-xl">
@@ -42,11 +50,13 @@ function Vegetable() {
           />
         </div>
       </div>
+
+      {/* Products List */}
       <div className="bg-[#fdf6ee] py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
           {products1.map((item) => (
             <div
-              key={item.id}
+              key={item._id}
               className="bg-white rounded-2xl shadow-md p-4 sm:p-6 text-center relative hover:shadow-lg transition-all duration-300 group"
             >
 
@@ -80,12 +90,13 @@ function Vegetable() {
 
 
               <div className="flex justify-center items-center gap-2 mt-3">
-                <span className="text-yellow-600 font-semibold">{item.price}</span>
+                <span className="text-yellow-600 font-semibold">${item.price}</span>
               </div>
 
               <button onClick={() => addToCart(item)} className="mt-4 sm:mt-5 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 sm:px-5 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105">
                 Add to Cart <FaShoppingCart />
               </button>
+
             </div>
           ))}
         </div>
