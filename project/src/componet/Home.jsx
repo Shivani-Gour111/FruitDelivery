@@ -7,8 +7,8 @@ import { FaArrowLeft } from "react-icons/fa";
 import { Truck, Clock, Zap } from 'lucide-react';
 import { FaCheckCircle } from "react-icons/fa";
 import TopProducts from "./TopProducts";
-import { useCart } from "./CartContext";
-import AddToCartMessage from "./AddToCartMessage";
+// import { useCart } from "./CartContext";
+// import AddToCartMessage from "./AddToCartMessage";
 
 
 

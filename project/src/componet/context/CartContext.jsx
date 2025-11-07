@@ -1,7 +1,5 @@
+import React, { createContext, useContext, useState } from "react";
 
-
-import React, {  useState, useContext } from "react";
-import { CartProvider } from "/src/context/CartContext.jsx";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -12,7 +10,9 @@ export const CartProvider = ({ children }) => {
     if (exists) {
       setCartItems(
         cartItems.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         )
       );
     } else {

@@ -1,66 +1,72 @@
 
 import React, { useState } from "react";
 import { FaShoppingCart } from 'react-icons/fa';
+import { useCart } from "./context/CartContext";
 // import { useCart } from "../context/CartContext"
+import { useLike } from "./LikeContext";
+import { FaRegHeart ,FaHeart,} from "react-icons/fa";
+
 function Fruits() {
+  const { addToCart } = useCart();
+ const { toggleLike, isLiked } = useLike();
 
-  const [cart, setCart] = useState([]);
+  //   const [cart, setCart] = useState([]);
 
-const addToCart = (item) => {
-  const exist = cart.find((x) => x.id === item.id);
-  if (exist) {
-    // agar already cart me hai to quantity badhao
-    setCart(
-      cart.map((x) =>
-        x.id === item.id ? { ...x, quantity: x.quantity + 1 } : x
-      )
-    );
-  } else {
-    // agar pehli baar add kar raha hai
-    setCart([...cart, { ...item, quantity: 1 }]);
-  }
-};
+  // const addToCart = (item) => {
+  //   const exist = cart.find((x) => x.id === item.id);
+  //   if (exist) {
+  //     // agar already cart me hai to quantity badhao
+  //     setCart(
+  //       cart.map((x) =>
+  //         x.id === item.id ? { ...x, quantity: x.quantity + 1 } : x
+  //       )
+  //     );
+  //   } else {
+  //     // agar pehli baar add kar raha hai
+  //     setCart([...cart, { ...item, quantity: 1 }]);
+  //   }
+  // };
 
-const increment = (id) => {
-  setCart(
-    cart.map((x) =>
-      x.id === id ? { ...x, quantity: x.quantity + 1 } : x
-    )
-  );
-};
+  // const increment = (id) => {
+  //   setCart(
+  //     cart.map((x) =>
+  //       x.id === id ? { ...x, quantity: x.quantity + 1 } : x
+  //     )
+  //   );
+  // };
 
-const decrement = (id) => {
-  setCart(
-    cart
-      .map((x) =>
-        x.id === id ? { ...x, quantity: x.quantity - 1 } : x
-      )
-      .filter((x) => x.quantity > 0)
-  );
-};
-const totalPrice = cart.reduce(
-  (acc, item) => acc + parseFloat(item.price.replace("$", "")) * item.quantity,
-  0
-);
-  const products = [
-    { id: 1, name: "Papaya", price: "$110.00", image: "Papaya1.jpg" },
-    { id: 2, name: "Kiwi", price: "$90.00", image: "kiwi1.jpg" },
-    { id: 3, name: "Granatalma", price: "$50.00", image: "Gránátalma.jpg" },
-    { id: 4, name: "Banana", price: "$120.00", image: "Banana.jpg" },
-    { id: 5, name: "Stroberi", price: "$99.00", image: "stroberi.jpg" },
-    { id: 6, name: "Apple", price: "$80.00", image: "Apple.jpg" },
-    { id: 7, name: "Mango", price: "$130.00", image: "mango.jpg" },
-    { id: 8, name: "Grapes", price: "$70.00", image: "grapes1.jpg" },
-    { id: 9, name: "Orange", price: "$100.00", image: "o.jpg" },
-    { id: 10, name: "Cherry", price: "$140.00", image: "cherry.jpg" },
-    { id: 11, name: "Pear", price: "$99.00", image: "Pear.jpg" },
-    { id: 12, name: "Custard Apple", price: "$80.00", image: "c1.jpg" },
-    { id: 13, name: "watermelon", price: "$130.00", image: "Sandía.jpg" },
-    { id: 14, name: " Raspberry", price: "$70.00", image: "Raspberry.jpg" },
-    { id: 15, name: "Dragon Fruit", price: "$100.00", image: "Dragon1.jpg" },
-    { id: 16, name: "Dragon Fruit", price: "$100.00", image: "p1.jpg" }
+  // const decrement = (id) => {
+  //   setCart(
+  //     cart
+  //       .map((x) =>
+  //         x.id === id ? { ...x, quantity: x.quantity - 1 } : x
+  //       )
+  //       .filter((x) => x.quantity > 0)
+  //   );
+  // };
+  // const totalPrice = cart.reduce(
+  //   (acc, item) => acc + parseFloat(item.price.replace("$", "")) * item.quantity,
+  //   0
+  // );
+ const products = [
+  { id: 1, name: "Papaya", price: "₹110.00", image: "Papaya1.jpg", category: "Fruits" },
+  { id: 2, name: "Kiwi", price: "₹90.00", image: "kiwi1.jpg", category: "Fruits" },
+  { id: 3, name: "Granatalma", price: "₹50.00", image: "Gránátalma.jpg", category: "Fruits" },
+  { id: 4, name: "Banana", price: "₹120.00", image: "Banana.jpg", category: "Fruits" },
+  { id: 5, name: "Stroberi", price: "₹99.00", image: "stroberi.jpg", category: "Fruits" },
+  { id: 6, name: "Apple", price: "₹80.00", image: "Apple.jpg", category: "Fruits" },
+  { id: 7, name: "Mango", price: "₹130.00", image: "mango.jpg", category: "Fruits" },
+  { id: 8, name: "Grapes", price: "₹70.00", image: "grapes1.jpg", category: "Fruits" },
+  { id: 9, name: "Orange", price: "₹100.00", image: "o.jpg", category: "Fruits" },
+  { id: 10, name: "Cherry", price: "₹140.00", image: "cherry.jpg", category: "Fruits" },
+  { id: 11, name: "Pear", price: "₹99.00", image: "Pear.jpg", category: "Fruits" },
+  { id: 12, name: "Custard Apple", price: "₹80.00", image: "c1.jpg", category: "Fruits" },
+  { id: 13, name: "Watermelon", price: "₹130.00", image: "Sandía.jpg", category: "Fruits" },
+  { id: 14, name: "Raspberry", price: "₹70.00", image: "Raspberry.jpg", category: "Fruits" },
+  { id: 15, name: "Dragon Fruit", price: "₹100.00", image: "Dragon1.jpg", category: "Fruits" },
+  { id: 16, name: "Pineapple", price: "₹100.00", image: "p1.jpg", category: "Fruits" }
+];
 
-  ];
   return (
     <>
       <section
@@ -91,114 +97,115 @@ const totalPrice = cart.reduce(
 
 
       <div className="bg-[#fdf6ee] min-h-screen py-12 px-4 md:px-6 lg:px-8">
-            {/* 🍎 Products Heading 🍎 */}
-            <h2 className="text-4xl font-extrabold text-gray-800 text-center mb-10">
-                Seasonal <span className="text-yellow-600">Freshness</span>
-            </h2>
+        {/* 🍎 Products Heading 🍎 */}
+        <h2 className="text-4xl font-extrabold text-gray-800 text-center mb-10">
+          Seasonal <span className="text-yellow-600">Freshness</span>
+        </h2>
 
-            {/* Grid Container: यह मुख्य रिस्पॉन्सिव हिस्सा है */}
-            <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-                {products.map((item) => (
-                    <div
-                        key={item.id}
-                        className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 text-center relative hover:shadow-2xl transition-all duration-300 group"
-                    >
-                        {/* 🥭 Product Image: w-32 h-32 से w-40 h-40 तक का साइज़ है */}
-                        <img
-                            src={item.image}
-                            alt={item.name}
-                            // w-32 h-32: छोटे स्क्रीन पर साइज़ 
-                            // md:w-40 md:h-40: मध्यम स्क्रीन पर साइज़ (यह रिस्पॉन्सिव साइज़िंग है)
-                            className="w-32 h-32 md:w-40 md:h-40 object-contain mx-auto mt-4 transition-transform duration-300 group-hover:scale-110"
-                        />
-                        <h3 className="mt-4 text-base md:text-xl font-bold text-gray-800">
-                            {item.name}
-                        </h3>
-                        <p className="text-xs md:text-sm text-gray-500 border-b border-gray-200 pb-2">
-                            {item.subtext || "Premium Quality"} 
-                        </p>
-                        <div className="flex justify-center items-center gap-2 mt-3">
-                            {item.oldPrice && (
-                                <span className="text-gray-400 line-through text-xs md:text-sm">
-                                    {item.oldPrice}
-                                </span>
-                            )}
-                            <span className="text-yellow-600 font-extrabold text-base md:text-lg">
-                                {item.price}
-                            </span>
-                        </div>
-                        {/* 🛒 Add to Cart Button 🛒 */}
-                       <button
-  onClick={() => addToCart(item)}
-  className="mt-5 bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold text-sm md:text-base py-2.5 px-6 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105 shadow-md"
->
-  Add to Cart <FaShoppingCart className="text-base" />
-</button>
-                    </div>
-                ))}
+        {/* Grid Container: यह मुख्य रिस्पॉन्सिव हिस्सा है */}
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+          {products.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 text-center relative hover:shadow-2xl transition-all duration-300 group"
+            >
+              <button
+                                        onClick={() => toggleLike(item)}
+                                        className="absolute right-3 top-3 text-2xl z-10 transition-transform duration-300 hover:scale-125"
+                                      >
+                                        {isLiked(item) ? (
+                                            <FaHeart className="text-red-500" />
+                                        ) : (
+                                          <FaRegHeart className="text-black hover:text-red-400" />
+                                        )}
+                                      </button>
+              <img
+                src={item.image}
+                alt={item.name}
+
+                className="w-32 h-32 md:w-40 md:h-40 object-contain mx-auto mt-4 transition-transform duration-300 group-hover:scale-110"
+              />
+              <h3 className="mt-4 text-base md:text-xl font-bold text-gray-800">
+                {item.name}
+              </h3>
+              <p className="text-xs md:text-sm text-gray-500 border-b border-gray-200 pb-2">
+                {item.subtext || "Premium Quality"}
+              </p>
+              <div className="flex justify-center items-center gap-2 mt-3">
+                {item.oldPrice && (
+                  <span className="text-gray-400 line-through text-xs md:text-sm">
+                    {item.oldPrice}
+                  </span>
+                )}
+                <span className="text-yellow-600 font-extrabold text-base md:text-lg">
+                  {item.price}
+                </span>
+              </div>
+              {/* 🛒 Add to Cart Button 🛒 */}
+              <button
+                             onClick={() => addToCart(item)} className="mt-5 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-5 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105">
+                              Add to Cart <FaShoppingCart />
+                            </button>
             </div>
+          ))}
+        </div>
 
-            {/* Browse All Products Button */}
-            <div className="text-center mt-12">
-                <button className="bg-yellow-400 text-gray-800 font-extrabold py-3 px-10 rounded-full border-2 border-yellow-600 hover:bg-yellow-500 hover:scale-105 transition-transform duration-300 shadow-xl">
-                    Browse All Products
-                </button>
-            </div>
-            {/* Browse All Products Button */}
-<div className="text-center mt-12">
-  <button className="bg-yellow-400 text-gray-800 font-extrabold py-3 px-10 rounded-full border-2 border-yellow-600 hover:bg-yellow-500 hover:scale-105 transition-transform duration-300 shadow-xl">
-    Browse All Products
-  </button>
-</div>
+        {/* Browse All Products Button */}
+        <div className="text-center mt-12">
+          <button className="bg-yellow-400 text-gray-800 font-extrabold py-3 px-10 rounded-full border-2 border-yellow-600 hover:bg-yellow-500 hover:scale-105 transition-transform duration-300 shadow-xl">
+            Browse All Products
+          </button>
+        </div>
+        {/* Browse All Products Button */}
 
-{/* 🛒 Cart Section 🛒 */}
-<div className="max-w-3xl mx-auto mt-16 bg-white p-6 rounded-2xl shadow-xl">
-  <h2 className="text-2xl font-bold mb-4 text-center">🛍️ Your Cart</h2>
-  {cart.length === 0 ? (
-    <p className="text-center text-gray-600">No items added yet.</p>
-  ) : (
-    <div>
-      {cart.map((item) => (
-        <div
-          key={item.id}
-          className="flex justify-between items-center border-b py-3"
-        >
-          <div className="flex items-center gap-4">
-            <img
-              src={item.image}
-              alt={item.name}
-              className="w-16 h-16 rounded-lg object-cover"
-            />
+        {/* 🛒 Cart Section 🛒 */}
+        {/* <div className="max-w-3xl mx-auto mt-16 bg-white p-6 rounded-2xl shadow-xl">
+          <h2 className="text-2xl font-bold mb-4 text-center">🛍️ Your Cart</h2>
+          {cart.length === 0 ? (
+            <p className="text-center text-gray-600">No items added yet.</p>
+          ) : (
             <div>
-              <h3 className="font-bold text-gray-800">{item.name}</h3>
-              <p className="text-yellow-600 font-semibold">{item.price}</p>
+              {cart.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex justify-between items-center border-b py-3"
+                >
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-16 h-16 rounded-lg object-cover"
+                    />
+                    <div>
+                      <h3 className="font-bold text-gray-800">{item.name}</h3>
+                      <p className="text-yellow-600 font-semibold">{item.price}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => decrement(item.id)}
+                      className="bg-gray-200 px-3 py-1 rounded-full font-bold"
+                    >
+                      -
+                    </button>
+                    <span>{item.quantity}</span>
+                    <button
+                      onClick={() => increment(item.id)}
+                      className="bg-yellow-400 px-3 py-1 rounded-full font-bold"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              ))}
+              <h3 className="text-right text-xl font-bold mt-4">
+                Total: ${totalPrice.toFixed(2)}
+              </h3>
             </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => decrement(item.id)}
-              className="bg-gray-200 px-3 py-1 rounded-full font-bold"
-            >
-              -
-            </button>
-            <span>{item.quantity}</span>
-            <button
-              onClick={() => increment(item.id)}
-              className="bg-yellow-400 px-3 py-1 rounded-full font-bold"
-            >
-              +
-            </button>
-          </div>
-        </div>
-      ))}
-      <h3 className="text-right text-xl font-bold mt-4">
-        Total: ${totalPrice.toFixed(2)}
-      </h3>
-    </div>
-  )}
-</div>
+          )}
+        </div> */}
 
-        </div>
+      </div>
 
 
 

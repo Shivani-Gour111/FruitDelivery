@@ -5,6 +5,7 @@ import cors from "cors";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "./models/userModel.js";
+import cartRoutes from "./routes/cartRoutes.js";
 
 const app = express();
 app.use(cors());
@@ -76,4 +77,5 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+app.use("/api/cart", cartRoutes);
 app.listen(5000, () => console.log("🚀 Server running on http://localhost:5000"));

@@ -12,11 +12,11 @@ import SignUp from "./componet/SignUp";
 import Wishlist from "./componet/Wishlist";
 import { LikeProvider } from "./componet/LikeContext";
 import CartPage from "./componet/CartPage";
-import { CartProvider } from "./componet/CartContext";
+import { CartProvider } from "./componet/context/CartContext";
 import { Toaster } from "react-hot-toast";
 
 
-// ✅ Layout jisme Navbar + Footer dono hain
+// ✅ Layout jisme Navbar + Footer dono hain 
 function MainLayout() {
   return (
     <>

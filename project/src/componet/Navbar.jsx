@@ -8,7 +8,7 @@ import { HiMenu, HiX } from "react-icons/hi";
 import { useLike } from "./LikeContext";
 import Wishlist from "./Wishlist";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "./CartContext";
+import { useCart } from "./context/CartContext";
 import { motion } from "framer-motion";
 
 // ⚠️ DropdownMenu कंपोनेंट को पूरी तरह से हटा दिया गया है।

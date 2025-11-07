@@ -64,14 +64,32 @@ export const LikeProvider = ({ children }) => {
     <LikeContext.Provider value={{ likedItems, toggleLike, isLiked }}>
       {children}
 
-      {/* Tailwind Popup */}
+      {/* Tailwind Popup - Top Right Corner Below Navbar */}
       {popupMessage && (
-        <div className="fixed bottom-6 right-6 bg-white text-green-600 font-medium shadow-lg rounded-lg px-5 py-3 flex items-center gap-2 border border-green-400 animate-fade-in-out">
+        <div className="fixed top-20 right-6 bg-white text-green-600 font-medium shadow-lg rounded-lg px-5 py-3 flex items-center gap-2 border border-green-400 animate-slide-in z-50">
           {popupMessage}
         </div>
       )}
     </LikeContext.Provider>
   );
 };
+
+// Custom animation using Tailwind's keyframes
+// Add this to your global CSS (e.g., index.css or App.css):
+/*
+@keyframes slide-in {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-slide-in {
+  animation: slide-in 0.4s ease-in-out;
+}
+*/
 
 export const useLike = () => useContext(LikeContext);

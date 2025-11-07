@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { FaHeart, FaStar, FaShoppingCart, FaTimes } from "react-icons/fa";
+import { FaStar, FaShoppingCart, FaHeart, FaRegHeart } from "react-icons/fa"; // ❤️ icons added
 import { useLike } from "./LikeContext";
 import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Wishlist() {
-  const { likedItems, toggleLike } = useLike();
+  const { likedItems, toggleLike, isLiked } = useLike(); // ✅ using isLiked for heart check
   const [sortBy, setSortBy] = useState("price-low");
 
   // ✅ Sorting logic
@@ -15,11 +16,13 @@ export default function Wishlist() {
     return 0;
   });
 
+  // ✅ Empty wishlist message
   if (!likedItems.length) {
     return (
       <div className="text-center mt-10 p-8 text-gray-600">
-       <div className="text-center mt-16">
-          <p className="text-gray-600 text-lg mb-4">Your cart is empty.</p>
+        <Toaster position="top-center" reverseOrder={false} />
+        <div className="text-center mt-16">
+          <p className="text-gray-600 text-lg mb-4">Your wishlist is empty.</p>
           <Link
             to="/"
             className="inline-block bg-teal-700 text-white px-6 py-3 rounded-full hover:bg-teal-800 transition"
@@ -33,6 +36,7 @@ export default function Wishlist() {
 
   return (
     <div className="min-h-screen bg-[#f2fcf6] py-10">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="pt-9 pb-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
@@ -69,16 +73,27 @@ export default function Wishlist() {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {sortedProducts.map((product) => (
-            <div key={`${product.category}-${product.id}`}
+            <div
+              key={`${product.category}-${product.id}`}
               className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 relative border border-gray-100 p-2"
             >
-              {/* Remove from wishlist button */}
+              {/* ❤️ Heart toggle button */}
               <button
-                onClick={() => toggleLike(product)}
-                className="absolute right-4 top-4 text-xl text-red-500 hover:text-red-700 z-10 p-1 transition-transform duration-300"
-                title="Remove from Wishlist"
+                onClick={() => {
+                  toggleLike(product);
+                  if (isLiked(product)) {
+                    toast.error(`${product.name} removed from wishlist 💔`);
+                  } else {
+                    toast.success(`${product.name} added to wishlist ❤️`);
+                  }
+                }}
+                className="absolute right-4 top-4 text-2xl z-10 transition-transform duration-300 hover:scale-125"
               >
-                <FaTimes />
+                {isLiked(product) ? (
+                  <FaHeart className="text-red-500" />
+                ) : (
+                  <FaRegHeart className="text-gray-300 hover:text-red-400" />
+                )}
               </button>
 
               {/* Product Image */}
@@ -116,8 +131,8 @@ export default function Wishlist() {
 
                 {/* Add to Cart Button */}
                 <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-5 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105">
-                                Add to Cart <FaShoppingCart />
-                              </button>
+                  Add to Cart <FaShoppingCart />
+                </button>
               </div>
             </div>
           ))}

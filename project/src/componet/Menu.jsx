@@ -2,42 +2,50 @@ import React from "react";
 import { FiHome } from "react-icons/fi";
 import { FaBoxOpen, FaLeaf, FaTruck, FaShoppingCart } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
+import { useLike } from "./LikeContext";
+import { FaRegHeart ,FaHeart,} from "react-icons/fa";
+
+import { useCart } from "./context/CartContext";
+
 
 export default function Menu() {
-  const categories = [
+  const { addToCart } = useCart(); 
+    const { toggleLike, isLiked } = useLike();
+  
+  // const categories = [
 
-    {
-      title: "Tomatoes",
-      description:
-        "Bursting with tangy freshness — add them to your salad, pasta, or cook up a saucy delight!",
-      image: "logo1.jpg",
-    },
-    {
-      title: "Blueberries",
-      description:
-        "Tiny power-packed bites of sweetness — perfect for smoothies, desserts, or a quick healthy snack!",
-      image: "blueberries.jpg",
-    },
-    {
-      title: "Strawberries",
-      description:
-        "Juicy, red, and irresistibly sweet — blend into shakes, top on cakes, or enjoy fresh from the basket!",
-      image: "logo2.jpg",
-    },
-    {
-      title: "Spinach",
-      description:
-        "Fresh green goodness — toss it in a salad, mix in curries, or cook a hearty homemade dish!",
-      image: "spinach.jpg",
-    },
-  ];
+  //   {
+  //     title: "Tomatoes",
+  //     description:
+  //       "Bursting with tangy freshness — add them to your salad, pasta, or cook up a saucy delight!",
+  //     image: "logo1.jpg",
+  //   },
+  //   {
+  //     title: "Blueberries",
+  //     description:
+  //       "Tiny power-packed bites of sweetness — perfect for smoothies, desserts, or a quick healthy snack!",
+  //     image: "blueberries.jpg",
+  //   },
+  //   {
+  //     title: "Strawberries",
+  //     description:
+  //       "Juicy, red, and irresistibly sweet — blend into shakes, top on cakes, or enjoy fresh from the basket!",
+  //     image: "logo2.jpg",
+  //   },
+  //   {
+  //     title: "Spinach",
+  //     description:
+  //       "Fresh green goodness — toss it in a salad, mix in curries, or cook a hearty homemade dish!",
+  //     image: "spinach.jpg",
+  //   },
+  // ];
   const products = [
     {
       id: 1,
       name: "Tomato",
       subtext: "Fresh Harvest",
-      price: "$4.70",
-      oldPrice: "$7.00",
+      price: "₹4.70",
+      
       image: "Tomato.jpg",
       rating: 4.5,
       sale: true,
@@ -46,7 +54,7 @@ export default function Menu() {
       id: 2,
       name: "Eggplant",
       subtext: "Farm Fresh",
-      price: "$5.99",
+      price: "₹5.99",
       image: "Eggplant.jpg",
       rating: 5,
       sale: false,
@@ -55,7 +63,7 @@ export default function Menu() {
       id: 3,
       name: "Matar",
       subtext: "Sweet Peas",
-      price: "$9.99",
+      price: "₹9.99",
       image: "Matar.jpg",
       rating: 4.5,
       sale: false,
@@ -64,8 +72,7 @@ export default function Menu() {
       id: 4,
       name: "Chili",
       subtext: "Hot Spice",
-      price: "$7.00",
-      oldPrice: "$9.00",
+      price: "₹7.00",
       image: "Chili.jpg",
       rating: 5,
       sale: true,
@@ -74,7 +81,7 @@ export default function Menu() {
       id: 5,
       name: "Orange",
       subtext: "Citrus Fresh",
-      price: "$9.99",
+      price: "₹9.99",
       image: "Orange1.jpg",
       rating: 4.5,
       sale: false,
@@ -83,8 +90,7 @@ export default function Menu() {
       id: 6,
       name: "Mango",
       subtext: "Tropical King",
-      price: "$7.00",
-      oldPrice: "$9.00",
+      price: "₹7.00",
       image: "mango.jpg",
       rating: 5,
       sale: true,
@@ -93,8 +99,8 @@ export default function Menu() {
       id: 7,
       name: "Grapes",
       subtext: "Juicy Bunch",
-      price: "$7.00",
-      oldPrice: "$9.00",
+      price: "₹7.00",
+      
       image: "grapes1.jpg",
       rating: 5,
       sale: true,
@@ -103,8 +109,7 @@ export default function Menu() {
       id: 8,
       name: "Strawberry",
       subtext: "Sweet Berry",
-      price: "$7.00",
-      oldPrice: "$9.00",
+      price: "₹7.00",
       image: "stroberi.jpg",
       rating: 5,
       sale: true,
@@ -187,10 +192,22 @@ export default function Menu() {
       <div className="bg-[#fdf6ee] min-h-screen py-12 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((item) => (
+            
             <div
               key={item.id}
               className="bg-white rounded-2xl shadow-md p-6 text-center relative hover:shadow-lg transition-all duration-300 group"
             >
+                <button
+                onClick={() => toggleLike(item)}
+                 className="absolute right-3 top-3 text-2xl z-10 transition-transform duration-300 hover:scale-125"
+               >
+                  {isLiked(item) ? (
+                <FaHeart className="text-red-500" />
+                 ) : (
+              <FaRegHeart className="text-gray-400 hover:text-red-400" />
+              )}
+            </button>
+    
               <img
                 src={item.image}
                 alt={item.name}
@@ -212,7 +229,8 @@ export default function Menu() {
                   {item.price}
                 </span>
               </div>
-              <button className="mt-5 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-5 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105">
+              <button
+               onClick={() => addToCart(item)} className="mt-5 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-5 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105">
                 Add to Cart <FaShoppingCart />
               </button>
             </div>
