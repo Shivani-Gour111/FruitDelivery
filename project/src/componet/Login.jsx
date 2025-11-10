@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 
-const Login = () => {
+export default function SignupStrict() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -62,6 +63,41 @@ const Login = () => {
     }
   };
 
+    const handleEmailBlur = () => {
+    if (email && !/^[^\s@]+@gmail\.com$/i.test(email.trim())) {
+      setErrors((p) => ({ ...p, email: "Email must end with @gmail.com" }));
+      toast.error("Email must end with @gmail.com", { duration: 2500 });
+    } else {
+      setErrors((p) => ({ ...p, email: "" }));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // final checks
+    if (!name.trim()) {
+      toast.error("Name required");
+      return;
+    }
+    if (!email.trim()) {
+      toast.error("Email required");
+      return;
+    }
+    if (!/^[^\s@]+@gmail\.com$/i.test(email.trim())) {
+      toast.error("Email must end with @gmail.com");
+      return;
+    }
+    if (!password) {
+      toast.error("Password required");
+      return;
+    }
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 letters");
+      return;
+    }
+    // All good — proceed (call API etc.)
+    toast.success("All inputs valid — ready to submit!");
+  };
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden">

@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaShoppingCart } from 'react-icons/fa';
+import { useCart } from "./context/CartContext";
+// import { useCart } from "../context/CartContext"
+import { useLike } from "./LikeContext";
+import { FaRegHeart ,FaHeart,} from "react-icons/fa";
 
 function Fruits() {
   const [products, setProducts] = useState([]);

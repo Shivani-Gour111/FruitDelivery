@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaShoppingBag } from "react-icons/fa";
+import { FaShoppingBag,FaTimes, FaLeaf } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { HiMenu, HiX } from "react-icons/hi";
@@ -12,6 +12,24 @@ import { useAuth } from "./AuthContext";
 import { FaAppleAlt } from "react-icons/fa";
 import { GiCarrot } from "react-icons/gi";
 import { BsPersonCircle } from "react-icons/bs";
+
+function Logo() {
+  return (
+    // NavLink: Logo को होम पेज से लिंक करता है
+    <NavLink to="/" className="flex items-center space-x-2 p-1">
+      
+      {/* 🌿 FaLeaf Icon (बड़ा साइज़: h-8 w-8) */}
+      <FaLeaf className="h-8 w-8 text-green-400 transform rotate-12" />
+      
+      {/* 🖋️ Logo Text (बड़ा साइज़: text-2xl) */}
+      <span className="text-white text-2xl font-extrabold tracking-tight">
+        Fresh<span className="text-green-400">Co</span> 
+      </span>
+      
+    </NavLink>
+  );
+}
+
 
 function Navbar() {
   const { likedItems } = useLike();
@@ -43,6 +61,11 @@ function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-teal-900 border-b border-gray-200">
       <div className="w-full flex items-center justify-between px-6 md:px-10 py-3">
+        
+        {/* ✅ Left Side: Dropdown की जगह अब Logo है */}
+        <div className="flex items-center space-x-4">
+          <Logo />
+        </div>
 
         <ul className="hidden lg:flex space-x-8 text-white font-medium text-lg mx-auto">
           {[
@@ -71,7 +94,12 @@ function Navbar() {
         <div className="flex items-center space-x-6 text-white">
 
           {/* Wishlist */}
-          <NavLink to="/wishlist" className="relative text-2xl">
+          <NavLink to="/wishlist" className={({ isActive }) =>
+                `relative text-2xl transition-all duration-300 ${isActive 
+                    ? "after:content-[''] after:absolute after:left-0 after:bottom-[-6px] after:w-full after:h-[2px] after:bg-green-500"
+                    : ""
+                  }`
+              }>
             <AiOutlineHeart />
             {likedItems.length > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">

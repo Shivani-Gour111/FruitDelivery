@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FaShoppingCart, FaHeart } from "react-icons/fa";
+import { FaShoppingCart, FaHeart, FaRegHeart } from "react-icons/fa";
 import { useLike } from "./LikeContext";
+import { useCart } from "./context/CartContext";    
 
 function Vegetable() {
+  const { addToCart } = useCart();
+
   const [products1, setProducts1] = useState([]);
 
   const { toggleLike, isLiked } = useLike();
@@ -30,8 +33,6 @@ function Vegetable() {
 
   return (
     <div className="bg-gray-50">
-
-      {/* Hero Section */}
       <div className="flex flex-col md:flex-row max-w-6xl mx-auto my-12 p-6 md:p-8 bg-white rounded-lg shadow-xl">
         <div className="md:w-1/2 pr-0 md:pr-10 py-6 md:py-10 text-center md:text-left">
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-gray-800">
@@ -44,7 +45,6 @@ function Vegetable() {
             Browse Vegetables <span className="ml-3 text-2xl">🌿</span>
           </button>
         </div>
-
         <div className="md:w-1/2 flex justify-center md:justify-end items-center mt-6 md:mt-0">
           <img
             src="vegi.jpg"
@@ -63,15 +63,25 @@ function Vegetable() {
               className="bg-white rounded-2xl shadow-md p-4 sm:p-6 text-center relative hover:shadow-lg transition-all duration-300 group"
             >
 
-              <button
+              {/* <button
                 onClick={() => toggleLike(item)}
                 className="absolute right-3 top-3 text-xl z-10 transition-transform duration-300 hover:scale-125"
               >
                 <FaHeart
                   className={`${isLiked(item) ? "text-red-500" : "text-gray-400 hover:text-red-400"}`}
                 />
-              </button>
 
+              </button> */}
+              <button
+                onClick={() => toggleLike(item)}
+                className="absolute right-3 top-3 text-2xl z-10 transition-transform duration-300 hover:scale-125"
+              >
+                {isLiked(item) ? (
+                  <FaHeart className="text-red-500" />
+                ) : (
+                  <FaRegHeart className="text-black hover:text-red-400" />
+                )}
+              </button>
               <img
                 src={item.image}
                 alt={item.name}
@@ -85,7 +95,7 @@ function Vegetable() {
                 <span className="text-yellow-600 font-semibold">${item.price}</span>
               </div>
 
-              <button className="mt-4 sm:mt-5 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 sm:px-5 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105">
+              <button onClick={() => addToCart(item)} className="mt-4 sm:mt-5 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 sm:px-5 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105">
                 Add to Cart <FaShoppingCart />
               </button>
 
@@ -96,5 +106,4 @@ function Vegetable() {
     </div>
   );
 }
-
 export default Vegetable;

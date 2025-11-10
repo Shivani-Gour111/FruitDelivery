@@ -7,8 +7,8 @@ import { FaArrowLeft } from "react-icons/fa";
 import { Truck, Clock, Zap } from 'lucide-react';
 import { FaCheckCircle } from "react-icons/fa";
 import TopProducts from "./TopProducts";
-import { useCart } from "./CartContext";
-import AddToCartMessage from "./AddToCartMessage";
+// import { useCart } from "./CartContext";
+// import AddToCartMessage from "./AddToCartMessage";
 
 
 
@@ -170,12 +170,11 @@ function WhyChooseUs() {
               key={index}
               className="flex items-start p-4 sm:p-5 md:p-6 bg-white border border-gray-200 rounded-xl shadow-md transition duration-300 hover:shadow-lg"
             >
-              {/* Icon */}
               <div className="mr-3 sm:mr-4 mt-1 flex-shrink-0">
                 {feature.icon}
               </div>
 
-              {/* Text Content */}
+             
               <div>
                 <h3 className="text-base sm:text-lg font-semibold text-gray-900">
                   {feature.title}

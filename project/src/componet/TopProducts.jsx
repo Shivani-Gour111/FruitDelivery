@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { FaHeart } from "react-icons/fa";
 import { useLike } from "./LikeContext";
 import { motion } from "framer-motion";
 import { useCart } from "./CartContext";
 import axios from "axios";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart,FaHeart, FaRegHeart } from "react-icons/fa";
  
 
 
@@ -52,35 +51,37 @@ export default function TopProducts() {
       </div>
 
       {/* ✅ Product Cards */}
-      <div className="bg-blue-50 min-h-screen py-12 px-6">
+    <div className="bg-blue-50 min-h-screen py-12 px-6">
   <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
-    {filteredProducts.slice(0, 4).map((product) => (
+    {filteredProducts.map((product) => (
       <motion.div
         key={product._id}
         className="bg-white rounded-2xl shadow-md p-6 text-center relative hover:shadow-lg transition-all duration-300 group"
         whileHover={{ scale: 1.03 }}
       >
-        {/* ❤️ Like */}
+        {/* ❤️ Like Button */}
         <button
           onClick={() => toggleLike(product)}
-          className="absolute right-3 top-3"
+          className="absolute right-3 top-3 text-2xl z-10 transition-transform duration-300 hover:scale-125"
         >
-          <FaHeart
-            className={`text-xl ${
-              isLiked(product) ? "text-red-500" : "text-gray-400"
-            }`}
-          />
+          {isLiked(product) ? (
+            <FaHeart className="text-red-500" />
+          ) : (
+            <FaRegHeart className="text-gray-400 hover:text-red-400" />
+          )}
         </button>
 
         {/* 🖼 Image */}
-        <img
-          src={`/${product.image}`}
-          alt={product.name}
-          className="w-36 h-36 object-contain mx-auto mt-4 transition-transform duration-300 group-hover:scale-110"
-        />
+        <div className="w-full flex items-center justify-center overflow-hidden">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-36 h-36 object-contain mx-auto mt-4 transition-transform duration-300 group-hover:scale-110"
+          />
+        </div>
 
-        {/* 📝 Info */}
+        {/* 📝 Product Info */}
         <h3 className="mt-4 text-lg font-semibold text-gray-800">
           {product.name}
         </h3>
@@ -89,19 +90,19 @@ export default function TopProducts() {
           {product.subtext || "Fresh & Organic"}
         </p>
 
-        {/* Price */}
+        {/* 💰 Price */}
         <div className="flex justify-center items-center gap-2 mt-3">
           {product.oldPrice && (
             <span className="text-gray-400 line-through text-sm">
               ₹{product.oldPrice}
             </span>
           )}
-
-          <span className="text-yellow-600 font-semibold">
+          <span className="text-yellow-600 font-semibold text-lg">
             ₹{product.price}
           </span>
         </div>
 
+        {/* 🛒 Add to Cart Button */}
         <button
           onClick={() => addToCart(product)}
           className="mt-5 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-5 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105"
@@ -112,9 +113,8 @@ export default function TopProducts() {
     ))}
 
   </div>
-
-  
 </div>
+
 
     </div>
   );
