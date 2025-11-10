@@ -122,7 +122,7 @@ const Contact = () => {
             {/* View on Map Link (Matching 'Explore Menu' style) */}
             <a 
               href="#" 
-              className={`inline-flex items-center py-2 px-6 ${textGreen} ${borderGreen} border-2 font-bold rounded-full transition duration-300 hover:${brandGreen} hover:text-white`}
+              className={`inline-flex items-center py-2 px-6 ${textGreen} ${borderGreen} border-2 font-bold rounded-full transition duration-300 hover:${brandGreen} hover:text-black `}
             >
               View on Map <span className="ml-2">&gt;</span>
             </a>

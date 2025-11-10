@@ -11,7 +11,8 @@ function Fruits() {
         const fruitProducts = res.data.filter(item => item.category === "fruit");
         setProducts(fruitProducts);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err)); 
+
   }, []);
 
   return (
