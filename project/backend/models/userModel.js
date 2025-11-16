@@ -4,9 +4,10 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: { type: String, unique: true },
   password: String,
-  role: { type: String, default: "user" },
+  role: { type: String, default: "user" }, // ✅ add this line
+  address: { type: String, default: "" },
+  avatarUrl: { type: String, default: null },
 });
 
 const User = mongoose.model("User", userSchema);
-
 export default User;
