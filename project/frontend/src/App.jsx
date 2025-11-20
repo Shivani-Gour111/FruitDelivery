@@ -17,10 +17,11 @@ import { Toaster } from "react-hot-toast";
 import { AnimatePresence } from "framer-motion";
 import { AuthProvider } from "./componet/context/AuthContext";
 import UserProfile from "./componet/UserProfile";
-import AddProduct from "./componet/AddProduct";
+import AddProduct from "./componet/pages/AddProduct";
 import AdminLayout from "./componet/AdminLayout";
 import ScrollToTop from "./componet/ScrollToTop";
 import {PageWrapper} from "./componet/ScrollToTop";
+import EditProduct from "./componet/pages/EditProduct";
 
 function MainLayout() {
   return (
@@ -68,8 +69,12 @@ function AnimatedRoutes() {
           <Route path="/profile" element={<PageWrapper><UserProfile /></PageWrapper>} />
         </Route>
 
-        <Route path="/add-product" element={<PageWrapper><AddProduct /></PageWrapper>} />
-        <Route path="/AdminLayout" element={<PageWrapper><AdminLayout /></PageWrapper>} />
+        <Route path="/admin/add-product" element={<PageWrapper><AddProduct /></PageWrapper>} />
+        <Route path="/admin/edit-product/:id" element={<PageWrapper><EditProduct /></PageWrapper>} />
+
+        <Route path="/AdminLayout" element={<PageWrapper><AdminLayout />
+        </PageWrapper>} />
+        
       </Routes>
     </AnimatePresence>
   );

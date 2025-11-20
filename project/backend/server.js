@@ -9,6 +9,9 @@ import User from "./models/userModel.js";
 import productRoutes from "./routes/productRoutes.js";
 import likeRoutes from "./routes/likeRoutes.js";
 import sendMailRoute from "./routes/sendMail.js";
+import userRoutes from "./routes/userRoutes.js";
+import settingsRoutes from "./routes/settingsRoutes.js";
+import adminRoutes from "./routes/admin.js";
 
 const app = express();
 app.use(cors());
@@ -171,6 +174,9 @@ app.put("/api/address/:id", async (req, res) => {
 app.use("/api/products", productRoutes);
 app.use("/api/like", likeRoutes);
 app.use("/api", sendMailRoute);
+app.use("/api/users", userRoutes);
+app.use("/api/settings", settingsRoutes);
+app.use("/api/admin", adminRoutes);
 
 // ✅ Start Server
 app.listen(5000, () => console.log("🚀 Server running on port 5000"));

@@ -15,14 +15,18 @@ function Footer() {
           </div>
 
           <div>
-            <h3 className="text-2xl sm:text-3xl font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-3 text-black-300 text-lg sm:text-xl">
-              <li><a href="/" className="hover:text-green-800 transition">Home</a></li>
-              <li><a href="/menu" className="hover:text-green-800 transition">Menu</a></li>
-              <li><a href="/services" className="hover:text-green-800 transition">Services</a></li>
-              <li><a href="/contact" className="hover:text-green-800 transition">Contact</a></li>
-            </ul>
-          </div>
+  <h3 className="text-2xl sm:text-3xl font-semibold mb-4">Quick Links</h3>
+  <ul className="space-y-3 text-black-300 text-lg sm:text-xl">
+    <li><a href="/" className="hover:text-green-800 transition">Home</a></li>
+    <li><a href="/menu" className="hover:text-green-800 transition">Menu</a></li>
+    
+    
+    <li><a href="/fruits" className="hover:text-green-800 transition">Fruits</a></li>
+    <li><a href="/vegetables" className="hover:text-green-800 transition">Vegetables</a></li>
+    <li><a href="/contact" className="hover:text-green-800 transition">Contact</a></li>
+  </ul>
+</div>
+
 
           <div>
             <h3 className="text-2xl sm:text-3xl font-semibold mb-4">Customer Support</h3>

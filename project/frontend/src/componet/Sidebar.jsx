@@ -1,49 +1,72 @@
-import React from 'react';
+import React from "react";
 
-const navItems = [
-    { name: 'Dashboard', icon: '🏠', section: 'dashboard' },
-    { name: 'Products', icon: '🍎', section: 'products' },
-    { name: 'Orders', icon: '🛒', section: 'orders' },
-    { name: 'Customers', icon: '👥', section: 'customers' },
-    { name: 'Discounts', icon: '🏷️', section: 'discounts' },
-    { name: 'Settings', icon: '⚙️', section: 'settings' },
-];
-
-const Sidebar = ({ activeSection, setActiveSection, brandGreen }) => {
+const Sidebar = ({ activeSection, setActiveSection, brandGreen, sidebarMenu }) => {
   return (
-    <div className={`w-64 flex flex-col ${brandGreen} text-white shadow-2xl transition-all duration-300 ease-in-out hidden lg:flex`}>
-      
-      {/* Logo/Title */}
-      <div className="flex items-center justify-center h-20 border-b border-green-700">
-        <span className="text-2xl font-extrabold tracking-wider">FreshDose Admin</span>
+    <aside className="w-64 bg-white shadow-md flex flex-col">
+
+      <div
+        className={`h-16 flex items-center justify-center font-bold text-white ${brandGreen}`}
+      >
+        Admin Panel
       </div>
 
-      {/* Navigation Links */}
-      <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-        {navItems.map((item) => (
-          <button
-            key={item.section}
-            onClick={() => setActiveSection(item.section)}
-            className={`w-full flex items-center p-3 rounded-lg transition-colors duration-200 text-left ${
-              activeSection === item.section
-                ? 'bg-green-700 font-bold shadow-md'
-                : 'hover:bg-green-600'
-            }`}
+      <nav className="flex-1 overflow-y-auto mt-2">
+
+        {sidebarMenu.map((item) => (
+          <div
+            key={item.key}
+            onClick={() => setActiveSection(item.key)}
+            className={`
+              flex items-center p-4 cursor-pointer relative
+              transition-all duration-300
+              ${activeSection === item.key ? "bg-gray-200 font-semibold" : "hover:bg-gray-100"}
+            `}
           >
-            <span className="text-xl mr-3">{item.icon}</span>
-            <span className="text-lg">{item.name}</span>
-          </button>
-        ))}
-      </nav>
 
-      {/* Logout Button */}
-      <div className="p-4 border-t border-green-700">
-        <button className="w-full flex items-center p-3 rounded-lg bg-red-600 hover:bg-red-700 transition-colors duration-200">
-          <span className="text-xl mr-3">🚪</span>
-          <span className="text-lg font-medium">Logout</span>
-        </button>
-      </div>
-    </div>
+            {/* Smooth left border animation */}
+            <div
+              className={`
+                absolute left-0 top-0 h-full w-1 rounded-r-lg 
+                transition-all duration-300
+                ${activeSection === item.key ? brandGreen : "bg-transparent group-hover:bg-gray-300"}
+              `}
+            ></div>
+
+            {/* Icon with soft animation */}
+            <span
+              className={`
+                text-xl mr-2 transition-all duration-300
+                ${activeSection === item.key ? "scale-110" : "group-hover:scale-105"}
+              `}
+              style={{ display: "flex" }}
+            >
+              {item.icon}
+            </span>
+
+            {/* Label with fade + slide animation */}
+            <span
+              className={`
+                hidden sm:block transition-all duration-300
+                ${activeSection === item.key ? "translate-x-1 opacity-100" : "opacity-80 group-hover:opacity-100 group-hover:translate-x-1"}
+              `}
+            >
+              {item.label}
+            </span>
+
+            {/* bottom hover underline */}
+            <div
+              className="
+                absolute bottom-0 left-3 right-3 h-[2px] bg-gray-300
+                scale-x-0 group-hover:scale-x-100
+                transition-all duration-300 origin-left
+              "
+            ></div>
+
+          </div>
+        ))}
+
+      </nav>
+    </aside>
   );
 };
 

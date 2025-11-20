@@ -8,6 +8,23 @@ router.get("/", async (req, res) => {
   const products = await Product.find();
   res.json(products);
 });
+router.put("/admin/edit-product/:id", async (req, res) => {
+  try {
+    await Product.findByIdAndUpdate(req.params.id, req.body);
+    res.json({ success: true, message: "Product updated!" });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.json({ success: true, message: "Product deleted!" });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 
 // ✅ Filter by category
 router.get("/:category", async (req, res) => {
@@ -17,7 +34,7 @@ router.get("/:category", async (req, res) => {
 });
 
 // ✅ Add Product (Auto increment ID)
-router.post("/add", async (req, res) => {
+router.post("/admin/add-product", async (req, res) => {
   try {
     // find last product id
     const lastProduct = await Product.findOne().sort({ id: -1 });

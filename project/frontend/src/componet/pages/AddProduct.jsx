@@ -39,7 +39,8 @@ const AddProduct = () => {
         await axios.put(`http://localhost:5000/api/products/update/${editId}`, formData);
         toast.success("✅ Product Updated Successfully!");
       } else {
-        await axios.post("http://localhost:5000/api/products/add", formData);
+        
+        await axios.post("http://localhost:5000/api/products/admin/add-product", formData);
         toast.success("✅ Product Added Successfully!");
       }
 
