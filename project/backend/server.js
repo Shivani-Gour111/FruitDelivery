@@ -12,16 +12,19 @@ import sendMailRoute from "./routes/sendMail.js";
 import userRoutes from "./routes/userRoutes.js";
 import settingsRoutes from "./routes/settingsRoutes.js";
 import adminRoutes from "./routes/admin.js";
+import dotenv from "dotenv";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+dotenv.config();
 
 // ✅ MongoDB Connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/fruitapp")
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.log(err));
+  .connect(process.env.MONGO_URl)
+  .then(() => console.log("✅ MongoDB Atlas Connected"))
+  .catch((err) => console.log("❌ MongoDB Error:", err));
+
 
 // ✅ Multer Setup for File Uploads
 const storage = multer.diskStorage({

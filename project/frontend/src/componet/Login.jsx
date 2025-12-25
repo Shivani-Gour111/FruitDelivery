@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
 import { LogIn, Leaf } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,10 +12,20 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState("");
-  const [role, setRole] = useState("user");
-
   const navigate = useNavigate();
   const { login } = useAuth(); // ✅ Context se login function
+  const location = useLocation();
+  useEffect(() => {
+    if (location.state?.message === "logoutSuccess") {
+      setPopup("logoutSuccess");
+
+      setTimeout(() => {
+        setPopup("");
+        // refresh pe popup dobara na aaye
+        window.history.replaceState({}, document.title);
+      }, 2000);
+    }
+  }, [location.state]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,18 +37,14 @@ const Login = () => {
         password: password.trim(),
       });
 
-    if (res.data.success === false) {
-  setPopup("loginError");
-  setTimeout(() => setPopup(""), 1500);
-  return;
-}
-
-
-      if (res.data.user.role !== role) {
-        setPopup("roleError");
+      if (res.data.success === false) {
+        setPopup("loginError");
         setTimeout(() => setPopup(""), 1500);
         return;
       }
+
+
+
 
       localStorage.setItem("token", res.data.token);
 
@@ -81,14 +90,6 @@ const Login = () => {
 
           <form onSubmit={handleLogin}>
 
-            {/* <select
-              className="w-full p-3 mb-4 border border-gray-300 rounded-full focus:ring-2 focus:ring-green-500"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-            >
-              <option value="user">Login as User</option>
-              <option value="admin">Login as Admin</option>
-            </select> */}
 
             <input
               type="email"
@@ -121,7 +122,12 @@ const Login = () => {
             <div className="relative mt-3 h-12 flex justify-center">
               {popup === "success" && <div className="popup-card">✅ Login Successful!</div>}
               {popup === "loginError" && <div className="popup-card error-popup">❌ Invalid Email or Password</div>}
-              {popup === "roleError" && ( <div className="popup-card error-popup">⚠️ Please select correct login role!</div> )}
+              {popup === "logoutSuccess" && (
+                <div className="popup-card success-popup">
+                  👋 Logged out successfully
+                </div>
+              )}
+
             </div>
           </form>
 

@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 import Product from "./models/Product.js";
+import dotenv from "dotenv";
 
-mongoose.connect("mongodb://127.0.0.1:27017/fruitapp")
+dotenv.config();
+mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log("DB Connected"))
   .catch(err => console.log(err));
 
