@@ -180,3 +180,156 @@ app.use("/api/admin", adminRoutes);
 
 // ✅ Start Server
 app.listen(5000, () => console.log("🚀 Server running on port 5000"));
+
+
+
+// =================== SOCKET.IO INTEGRATION ===================
+// import express from "express";
+// import mongoose from "mongoose";
+// import cors from "cors";
+// import bcrypt from "bcryptjs";
+// import jwt from "jsonwebtoken";
+// import fs from "fs";
+// import multer from "multer";
+// import http from "http";               // <-- ADD THIS
+// import { Server } from "socket.io";    // <-- ADD THIS
+
+// import User from "./models/userModel.js";
+// import productRoutes from "./routes/productRoutes.js";
+// import likeRoutes from "./routes/likeRoutes.js";
+// import sendMailRoute from "./routes/sendMail.js";
+// import userRoutes from "./routes/userRoutes.js";
+// import settingsRoutes from "./routes/settingsRoutes.js";
+// import adminRoutes from "./routes/admin.js";
+
+// const app = express();
+// app.use(cors());
+// app.use(express.json());
+
+// // Create HTTP Server for Socket.io
+// const server = http.createServer(app);   // <-- IMPORTANT
+
+// // Create Socket.io Instance
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST"],
+//   },
+// });
+
+// io.on("connection", (socket) => {
+//   console.log("🟢 User connected:", socket.id);
+
+//   socket.on("disconnect", () => {
+//     console.log("🔴 User disconnected:", socket.id);
+//   });
+// });
+
+// // MongoDB connection
+// mongoose
+//   .connect("mongodb://127.0.0.1:27017/fruitapp")
+//   .then(() => console.log("✅ MongoDB Connected"))
+//   .catch((err) => console.log(err));
+
+// // Multer Storage
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     const dir = "./uploads/";
+//     if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+//     cb(null, dir);
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + "_" + file.originalname);
+//   },
+// });
+
+// const upload = multer({ storage });
+
+// app.use("/uploads", express.static("uploads"));
+
+// // signup, login, image upload, routes  (same code keep here ...)
+
+// app.use("/api/products", productRoutes);
+// app.use("/api/like", likeRoutes);
+// app.use("/api", sendMailRoute);
+// app.use("/api/users", userRoutes);
+// app.use("/api/settings", settingsRoutes);
+// app.use("/api/admin", adminRoutes);
+
+// // 🚀 IMPORTANT: Start server using server.listen()
+// server.listen(5000, () => {
+//   console.log("🚀 Server running on port 5000 with Socket.io");
+// });
+// import express from "express";
+// import mongoose from "mongoose";
+// import cors from "cors";
+// import bcrypt from "bcryptjs";
+// import jwt from "jsonwebtoken";
+// import fs from "fs";
+// import multer from "multer";
+// import http from "http";
+// import { Server } from "socket.io";
+
+// import User from "./models/userModel.js";
+// import productRoutes from "./routes/productRoutes.js";
+// import likeRoutes from "./routes/likeRoutes.js";
+// import cartRoutes from "./routes/cartRoutes.js";
+// import sendMailRoute from "./routes/sendMail.js";
+// import userRoutes from "./routes/userRoutes.js";
+// import settingsRoutes from "./routes/settingsRoutes.js";
+// import adminRoutes from "./routes/admin.js";
+
+// const app = express();
+// app.use(cors());
+// app.use(express.json());
+
+// // ⭐ Create HTTP Server
+// const server = http.createServer(app);
+
+// // ⭐ Socket.IO Setup
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:5173", // react vite URL
+//     methods: ["GET", "POST"],
+//   },
+// });
+
+// io.on("connection", (socket) => {
+//   console.log("🟢 Connected:", socket.id);
+
+//   socket.on("disconnect", () => {
+//     console.log("🔴 Disconnected:", socket.id);
+//   });
+// });
+
+// // ⭐ MongoDB
+// mongoose.connect("mongodb://127.0.0.1:27017/fruitapp");
+
+// // ⭐ Multer Upload
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     const dir = "./uploads/";
+//     if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+//     cb(null, dir);
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + "_" + file.originalname);
+//   },
+// });
+// const upload = multer({ storage });
+
+// app.use("/uploads", express.static("uploads"));
+
+// // ⭐ Routes
+// app.use("/api/products", productRoutes);
+// app.use("/api/like", likeRoutes);
+// app.use("/api/cart", cartRoutes);
+// app.use("/api", sendMailRoute);
+// app.use("/api/users", userRoutes);
+// app.use("/api/settings", settingsRoutes);
+// app.use("/api/admin", adminRoutes);
+
+// // ⭐ Start server (IMPORTANT)
+// server.listen(5000, () => {
+//   console.log("🚀 Server running on 5000 with socket.io");
+// });

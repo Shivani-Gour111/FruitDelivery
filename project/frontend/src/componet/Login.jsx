@@ -81,14 +81,14 @@ const Login = () => {
 
           <form onSubmit={handleLogin}>
 
-            <select
+            {/* <select
               className="w-full p-3 mb-4 border border-gray-300 rounded-full focus:ring-2 focus:ring-green-500"
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
               <option value="user">Login as User</option>
               <option value="admin">Login as Admin</option>
-            </select>
+            </select> */}
 
             <input
               type="email"

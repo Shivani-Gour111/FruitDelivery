@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
+import { FaHeart, FaRegHeart,FaShoppingCart } from "react-icons/fa";
+
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useLike } from "./context/LikeContext";
@@ -47,7 +48,7 @@ export default function TopProducts() {
         ))}
       </div>
 
-      <div className="bg-green-50 min-h-screen  ">
+      <div className="bg-green-50 min-h-screen">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {filteredProducts.slice(0, 4).map((product) => (
             <motion.div
@@ -91,11 +92,18 @@ export default function TopProducts() {
               </div>
 
               <button
-                onClick={() => addToCart(product)}
+                onClick={() => {
+                  if (!user) {
+                    alert("Please login first!");
+                    return;
+                  }
+                  addToCart(product);
+                }}
                 className="mt-5 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-5 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105"
               >
-                Add to Cart <FaShoppingCart />
+                Add to Cart <FaShoppingCart className="text-base" />
               </button>
+              
             </motion.div>
           ))}
         </div>

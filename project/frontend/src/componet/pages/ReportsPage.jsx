@@ -13,7 +13,7 @@ const ReportsPage = () => {
       const r3 = await axios.get("/api/admin/reports/products-top?limit=10");
       setRevenue(r1.data);
       setOrdersSummary(r2.data);
-      setProducts(r3.data);
+      setProducts(r3.data);   
     })();
   }, []);
 

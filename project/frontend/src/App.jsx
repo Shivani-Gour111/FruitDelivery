@@ -82,17 +82,34 @@ function AnimatedRoutes() {
 
 function App() {
   return (
+    // <AuthProvider>
+    //   <CartProvider>
+    //     <Router>
+    //       <LikeProvider>
+    //         <ScrollToTop />
+    //         <AnimatedRoutes />
+    //       </LikeProvider>
+    //       <Toaster position="top-center" reverseOrder={false} />
+    //     </Router>
+    //   </CartProvider>
+    // </AuthProvider>
+  
+  
     <AuthProvider>
-      <CartProvider>
-        <Router>
-          <LikeProvider>
+      <Router>
+      <LikeProvider>
+        <CartProvider>
+         
             <ScrollToTop />
             <AnimatedRoutes />
-          </LikeProvider>
-          <Toaster position="top-center" reverseOrder={false} />
-        </Router>
-      </CartProvider>
+            <Toaster position="top-center" reverseOrder={false} />
+          
+        </CartProvider>
+      </LikeProvider>
+      </Router>
     </AuthProvider>
+
+
   );
 }
 

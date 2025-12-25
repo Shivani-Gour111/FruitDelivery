@@ -91,9 +91,11 @@ function Navbar() {
           {/* Wishlist */}
           <NavLink to="/wishlist" className="relative text-2xl">
             <AiOutlineHeart />
-            {likedItems.length > 0 && (
+           {likedItems?.length > 0 && (
+
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                {likedItems.length}
+               {likedItems?.length || 0}
+
               </span>
             )}
           </NavLink>
@@ -108,7 +110,7 @@ function Navbar() {
               <FaShoppingBag />
             </motion.div>
 
-            {cartItems.length > 0 && (
+            {cartItems?.length > 0 && (
               <motion.span
                 key={cartItems.length}
                 initial={{ scale: 0 }}
@@ -116,7 +118,8 @@ function Navbar() {
                 transition={{ type: "spring", stiffness: 300, damping: 10 }}
                 className="absolute -top-2 -right-2 bg-yellow-400 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full"
               >
-                {cartItems.length}
+               {cartItems?.length || 0}
+
               </motion.span>
             )}
           </div>

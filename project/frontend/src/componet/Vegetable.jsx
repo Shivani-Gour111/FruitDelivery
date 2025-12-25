@@ -90,7 +90,14 @@ function Vegetable() {
                 <span className="text-yellow-600 font-semibold">${item.price}</span>
               </div>
 
-              <button className="mt-4 sm:mt-5 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 sm:px-5 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105">
+              <button
+              onClick={() => {
+                  if (!user) {
+                    alert("Please login first!");
+                    return;
+                  }
+                  addToCart(item);
+                }} className="mt-4 sm:mt-5 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 sm:px-5 rounded-full flex items-center justify-center gap-2 mx-auto transition-transform duration-300 group-hover:scale-105">
                 Add to Cart <FaShoppingCart />
               </button>
 
